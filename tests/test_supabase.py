@@ -1,4 +1,5 @@
 import copy
+import re
 from datetime import date
 from pathlib import Path
 from unittest.mock import Mock, patch
@@ -9,6 +10,11 @@ import requests
 from streamlit.testing.v1 import AppTest
 
 from granules_store import ConflictError, StoreError, SupabaseStore, encode_state, decode_state
+
+APP = Path(__file__).resolve().parents[1] / 'app_gran.py'
+# Le mot de passe réel n'est pas dans le dépôt : les tests ouvrent la session
+# avec l'empreinte attendue, comme le fait un login réussi.
+ACCES_EMPREINTE = re.search(r'ACCES_EMPREINTE = "([0-9a-f]+)"', APP.read_text()).group(1)
 
 COLUMNS = ['date', 'acteur', 'type_acteur', 'conditionnement', 'produit', 'palier_t', 'unite', 'prix_ht', 'taux_tva', 'prix_ttc']
 
@@ -62,23 +68,32 @@ def test_missing_row_and_unknown_payload_rejected():
         decode_state({'schema_version': 2}, COLUMNS)
 
 
-def test_app_without_secrets_runs_in_explicit_local_mode():
-    at = AppTest.from_file(Path(__file__).resolve().parents[1] / 'app_gran.py', default_timeout=30).run()
+def test_app_requires_password_even_without_secrets():
+    at = AppTest.from_file(APP, default_timeout=30).run()
     assert not at.exception
+    assert len(at.tabs) == 0
+    at.text_input[0].set_value('mauvais-mot-de-passe')
+    at.button[0].click().run()
+    assert len(at.tabs) == 0
+    assert any('incorrect' in e.value for e in at.error)
+
+
+def test_app_without_secrets_runs_in_explicit_local_mode():
+    at = AppTest.from_file(APP, default_timeout=30)
+    login(at)
+    assert len(at.tabs) == 4
     assert any('Mode session seule' in w.value for w in at.warning)
 
 
 def configured_app(monkeypatch):
     monkeypatch.setenv('SUPABASE_URL', 'https://example.supabase.co')
     monkeypatch.setenv('SUPABASE_SECRET_KEY', 'sb_secret_test')
-    monkeypatch.setenv('GRANULES_APP_PASSWORD', 'test-password-for-team')
-    return AppTest.from_file(Path(__file__).resolve().parents[1] / 'app_gran.py', default_timeout=30)
+    return AppTest.from_file(APP, default_timeout=30)
 
 
 def login(at):
+    at.session_state['granules_acces'] = ACCES_EMPREINTE
     at.run()
-    at.text_input[0].set_value('test-password-for-team')
-    at.button[0].click().run()
     assert not at.exception
 
 

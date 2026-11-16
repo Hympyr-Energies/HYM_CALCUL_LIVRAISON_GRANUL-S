@@ -1546,6 +1546,38 @@ def secret_serveur(nom):
         return os.environ.get(nom, "").strip()
 
 
+# Mot de passe de connexion : seule son empreinte PBKDF2-SHA256 salée figure
+# dans le code (dépôt public). Pour le changer, recalculer sel + empreinte :
+#   python -c "import hashlib,os;s=os.urandom(16);print(s.hex(),
+#   hashlib.pbkdf2_hmac('sha256',b'NOUVEAU',s,600000).hex())"
+ACCES_SEL = "272ff44ec0272c516b1a516bbc76abe0"
+ACCES_EMPREINTE = "37a0061896b698156997ea56804eb3cd3d8f64756816db28419bcdb51e28f70d"
+ACCES_ITERATIONS = 600_000
+
+
+def mot_de_passe_valide(saisi):
+    calcul = hashlib.pbkdf2_hmac("sha256", saisi.encode(), bytes.fromhex(ACCES_SEL),
+                                 ACCES_ITERATIONS).hex()
+    return hmac.compare_digest(calcul, ACCES_EMPREINTE)
+
+
+def verifier_acces():
+    """Bloque tout l'outil tant que le mot de passe n'a pas été saisi."""
+    if st.session_state.get("granules_acces") == ACCES_EMPREINTE:
+        return
+    st.title("🌿 Hympyr Énergies — Cockpit granulés")
+    st.caption("Accès réservé à l'équipe. Utilisez le mot de passe transmis en interne.")
+    with st.form("connexion_equipe"):
+        saisi = st.text_input("Mot de passe", type="password")
+        valide = st.form_submit_button("Se connecter", type="primary")
+    if valide:
+        if mot_de_passe_valide(saisi):
+            st.session_state["granules_acces"] = ACCES_EMPREINTE
+            st.rerun()
+        st.error("Mot de passe incorrect.")
+    st.stop()
+
+
 def connexion_supabase():
     url = secret_serveur("SUPABASE_URL")
     cle = secret_serveur("SUPABASE_SECRET_KEY") or secret_serveur("SUPABASE_SERVICE_ROLE_KEY")
@@ -1553,23 +1585,6 @@ def connexion_supabase():
         return None
     if not url or not cle:
         st.error("Configuration Supabase incomplète : renseignez SUPABASE_URL et SUPABASE_SECRET_KEY dans les secrets Streamlit.")
-        st.stop()
-    mot_de_passe = secret_serveur("GRANULES_APP_PASSWORD")
-    if len(mot_de_passe) < 16:
-        st.error("Définissez GRANULES_APP_PASSWORD (au moins 16 caractères) dans les secrets Streamlit pour protéger les données partagées.")
-        st.stop()
-    empreinte = hashlib.sha256(mot_de_passe.encode()).hexdigest()
-    if st.session_state.get("granules_acces") != empreinte:
-        st.title("🌿 Hympyr Énergies — Cockpit granulés")
-        st.caption("Accès réservé à l'équipe. Utilisez le mot de passe transmis en interne.")
-        with st.form("connexion_equipe"):
-            saisi = st.text_input("Mot de passe d'équipe", type="password")
-            valide = st.form_submit_button("Se connecter", type="primary")
-        if valide:
-            if hmac.compare_digest(hashlib.sha256(saisi.encode()).hexdigest(), empreinte):
-                st.session_state["granules_acces"] = empreinte
-                st.rerun()
-            st.error("Mot de passe incorrect.")
         st.stop()
     try:
         return SupabaseStore(url, cle)
@@ -1618,6 +1633,7 @@ def sauver_ou_arreter():
         st.stop()
 
 
+verifier_acces()
 base_supabase = connexion_supabase()
 init_state()
 charger_grille_versionnee()
@@ -1729,9 +1745,9 @@ with st.sidebar:
                 if key != "granules_acces":
                     del st.session_state[key]
             st.rerun()
-        if st.button("Se déconnecter"):
-            st.session_state.clear()
-            st.rerun()
+    if st.button("Se déconnecter"):
+        st.session_state.clear()
+        st.rerun()
 
 ong1, ong2, ong3, ong4 = st.tabs([
     "🧮 Simulateur", "📋 Grille tarifaire", "📥 Données", "📊 Analyse"])

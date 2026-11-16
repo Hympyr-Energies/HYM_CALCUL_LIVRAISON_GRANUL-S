@@ -2,19 +2,22 @@
 
 Simulateur Streamlit de prix HT/TTC et livraison, grille tarifaire éditable et analyse de l'historique des prix.
 
+## Mot de passe de connexion
+
+L'outil entier est protégé par un mot de passe d'équipe, avec ou sans Supabase. Le mot de passe est transmis en interne : il n'est jamais écrit dans le dépôt, seule son empreinte PBKDF2-SHA256 salée (600 000 itérations) figure dans `app_gran.py` (`ACCES_SEL`, `ACCES_EMPREINTE`). Pour le changer, générer un nouveau couple sel/empreinte avec la commande indiquée en commentaire au-dessus de ces constantes, puis remplacer les deux valeurs. Le bouton **Se déconnecter** de la barre latérale ferme la session.
+
 ## Activer la persistance Supabase
 
 La table `public.granules_state` et la fonction `public.granules_save_state` ont été installées dans le projet **cmvkijtlkzfwnzipgstc**. Le schéma de référence figure dans `supabase/granules.sql` ; ne pas réexécuter ce fichier sur un projet où les objets existent déjà.
 
-Dans **Streamlit Community Cloud → votre application → Settings → Secrets**, ajouter les trois valeurs de `.streamlit/secrets.toml.example` :
+Dans **Streamlit Community Cloud → votre application → Settings → Secrets**, ajouter les deux valeurs de `.streamlit/secrets.toml.example` :
 
 ```toml
 SUPABASE_URL = "https://cmvkijtlkzfwnzipgstc.supabase.co"
 SUPABASE_SECRET_KEY = "REMPLACER_PAR_VOTRE_CLE_SERVEUR_sb_secret"
-GRANULES_APP_PASSWORD = "REMPLACER_PAR_UN_MOT_DE_PASSE_LONG_ET_UNIQUE"
 ```
 
-La clé serveur se trouve dans **Supabase → projet → Settings → API Keys → Secret keys**. Une ancienne clé `service_role` reste compatible via `SUPABASE_SERVICE_ROLE_KEY`. Une clé `anon` ou `sb_publishable_` n'a volontairement aucun accès à ces données. Ne jamais publier la clé serveur dans GitHub, dans un formulaire de l'application ou dans une conversation. Le mot de passe d'équipe doit contenir au moins 16 caractères et être partagé par un canal interne adapté.
+La clé serveur se trouve dans **Supabase → projet → Settings → API Keys → Secret keys**. Une ancienne clé `service_role` reste compatible via `SUPABASE_SERVICE_ROLE_KEY`. Une clé `anon` ou `sb_publishable_` n'a volontairement aucun accès à ces données. Ne jamais publier la clé serveur dans GitHub, dans un formulaire de l'application ou dans une conversation.
 
 Enregistrer les secrets, puis ouvrir l'application et se connecter avec le mot de passe d'équipe. La première fois, importer le classeur de référence depuis « Grille tarifaire », ou vérifier les valeurs par défaut et cliquer sur **Enregistrer l'état actuel**. La base est initialement vide : aucun ancien contenu de session Streamlit n'a été récupéré automatiquement. Exporter d'abord en Excel les données d'une ancienne session encore ouverte avant un redémarrage.
 
