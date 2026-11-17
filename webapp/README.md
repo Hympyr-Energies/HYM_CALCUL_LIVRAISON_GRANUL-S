@@ -6,7 +6,7 @@ Mêmes fonctionnalités, mêmes règles de calcul (vérifiées par des tests de 
 ## Utiliser l'application
 
 - **Ouvrir `index.html`** dans un navigateur récent (Chrome, Edge, Safari, Firefox) ou le **publier tel quel** sur n'importe quel hébergement statique (GitHub Pages, Netlify, serveur interne…). Il n'y a rien à installer.
-- **Mot de passe d'équipe** : le même que pour l'outil Streamlit (seule son empreinte PBKDF2-SHA256 salée figure dans le code, comme avant).
+- **Connexion par compte membre** (base commune) : chaque membre a son propre compte Supabase (e-mail + mot de passe), créé et administré dans Supabase par l'administrateur. Plus de mot de passe d'équipe partagé ni d'empreinte dans le code. En mode local (sans base commune), aucune connexion : les données ne quittent pas l'appareil.
 - **Connexion internet** requise pour : la recherche d'adresse (API Adresse de l'État), l'itinéraire routier (OSRM), la police Poppins, et l'export/import Excel et PDF (bibliothèques chargées à la demande depuis cdnjs). Sans réponse du routeur, le simulateur bascule sur une estimation orthodromique ×1,30, signalée comme telle ; le kilométrage peut toujours être forcé à la main.
 
 ### Où sont enregistrées les données ?
@@ -16,7 +16,7 @@ Mêmes fonctionnalités, mêmes règles de calcul (vérifiées par des tests de 
 | **Mode local** (par défaut) | `SYNC_URL` vide | Grille et historique conservés dans le navigateur de l'appareil. Pastille « Mode local » dans l'en-tête. Exporter régulièrement le classeur Excel ou la sauvegarde `.json` (Paramètres). |
 | **Base commune** | `SYNC_URL` renseigné | Même base Supabase que la version Streamlit, partagée par toute l'équipe : chargement au démarrage, sauvegarde à chaque validation, détection des modifications concurrentes (révision), repli local si la base est injoignable. Voir `supabase/README.md`. |
 
-La clé serveur Supabase **n'est jamais dans la page** : elle reste dans une fonction Edge qui vérifie le mot de passe d'équipe avant toute lecture ou écriture.
+**Aucune clé Supabase n'est dans la page** : la connexion et les données passent par une fonction Edge qui détient les clés, valide le jeton du membre, vérifie qu'il figure dans la liste des membres (`granules_membres`, actif) puis lit ou écrit. Chaque sauvegarde enregistre qui l'a faite (« Dernière sauvegarde : … » dans les Paramètres).
 
 ## Les quatre onglets
 
@@ -32,7 +32,7 @@ La clé serveur Supabase **n'est jamais dans la page** : elle reste dans une fon
 
 ## Activer la base commune
 
-1. Déployer la fonction `supabase/functions/granules-state` (instructions dans `supabase/README.md`).
+1. Appliquer la migration SQL et déployer la fonction `supabase/functions/granules-state`, créer les membres (instructions dans `supabase/README.md`).
 2. Reconstruire la page avec l'adresse de la fonction :
    ```bash
    python3 build.py --sync-url https://VOTRE-PROJET.supabase.co/functions/v1/granules-state
@@ -62,6 +62,6 @@ La logique est identique au Python, y compris l'arrondi (égalités exactes arro
 ## Limites connues
 
 - Les fichiers `.xls` (ancien format) ne sont pas lus : les enregistrer en `.xlsx` ou `.csv`.
-- Pas de journal par utilisateur : l'accès reste un mot de passe d'équipe commun, comme avant.
+- La liste des membres et leurs mots de passe se gèrent dans Supabase (tableau de bord) : pas d'écran d'administration dans l'application.
 - L'historique est un document JSON unique (comme dans la version Streamlit) : adapté à l'usage interne ; pour de très gros volumes, prévoir des tables normalisées.
 - Taux de TVA de départ (10 % marchandise et livraison) : paramètres de l'outil **à valider par la comptabilité**, comme dans la version d'origine.

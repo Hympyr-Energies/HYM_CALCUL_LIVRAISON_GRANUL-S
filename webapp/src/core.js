@@ -126,10 +126,11 @@
       if (S.mode !== 'cloud') { S.statut = 'ok'; S.derniere = Date.now(); S.persisterLocal(); S.notifier(); return Promise.resolve(true); }
       S.statut = 'enregistrement'; S.notifier();
       return nuage('save', { payload: H.encoderEtat(S.etat), expected_revision: S.revision }).then(function (r) {
-        S.revision = r.revision; S.statut = 'ok'; S.vide = false; S.derniere = Date.now(); S.message = ''; S.persisterLocal(); S.notifier(); return true;
+        S.revision = r.revision; S.statut = 'ok'; S.vide = false; S.derniere = Date.now(); S.message = ''; S.auteur = (APP.session.utilisateur() || {}).email || ''; S.persisterLocal(); S.notifier(); return true;
       }, function (e) {
         S.message = e.message;
         if (e.code === 'conflit') { S.statut = 'conflit'; S.notifier(); APP.fenetreConflit(); }
+        else if (e.code === 'session') { S.statut = 'erreur'; S.notifier(); APP.porte.ouvrir().then(function () { APP.porte.fermer(); return S.enregistrer(); }); }
         else { S.statut = 'erreur'; S.notifier(); if (!opts.silencieux) APP.toast('Sauvegarde non confirmée : ' + e.message + ' Vos données restent sur cet appareil.', 'err'); }
         return false;
       });
@@ -140,23 +141,78 @@
       S.statut = 'enregistrement'; S.notifier();
       return nuage('load').then(function (r) {
         if (r.payload) { S.etat = H.decoderEtat(r.payload); S.vide = false; } else { S.vide = true; }
-        S.revision = r.revision; S.statut = 'ok'; S.message = ''; S.derniere = Date.now(); S.persisterLocal(); S.notifier(); return true;
+        S.revision = r.revision; S.statut = 'ok'; S.message = ''; S.derniere = Date.now(); S.auteur = r.updated_by_email || ''; S.majBase = r.updated_at || null; S.persisterLocal(); S.notifier(); return true;
       }, function (e) { S.statut = 'erreur'; S.message = e.message; S.notifier(); throw e; });
     }
   };
 
-  /** Appel à la fonction serveur (qui détient la clé Supabase : elle n'est jamais dans la page). */
-  function nuage(action, corps) {
-    var pw = sessionStorage.getItem('hym.pw') || '';
-    var body = Object.assign({ action: action, password: pw }, corps || {});
-    return APP.reseau.json(CFG.SYNC_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), timeout: 20000 }).catch(function (e) {
-      var err = new Error('Base injoignable.');
-      if (e.status === 409) { err = new Error('Une autre session a enregistré des modifications.'); err.code = 'conflit'; }
-      else if (e.status === 401 || e.status === 403) { err = new Error('Mot de passe refusé par le serveur.'); err.code = 'auth'; }
-      else if (e.status) err = new Error('Échec de la base (HTTP ' + e.status + ').');
-      throw err;
+  /* ------------------------------------------------------------------ fonction serveur (qui détient les clés Supabase : la page n'en contient aucune) */
+  function erreurDe(e, corps) {
+    var err = new Error(corps && corps.message ? corps.message : 'Service injoignable.');
+    var st = e && e.status;
+    if (st === 409) err.code = 'conflit';
+    else if (st === 401) err.code = 'auth';
+    else if (st === 403) err.code = 'membre';
+    else if (st === 400) err.code = 'requete';
+    else if (st) { err.code = 'base'; if (!corps || !corps.message) err.message = 'Échec du service (HTTP ' + st + ').'; }
+    else err.code = 'reseau';
+    return err;
+  }
+  function appeler(action, corps, jeton) {
+    var headers = { 'Content-Type': 'application/json' };
+    if (jeton) headers.Authorization = 'Bearer ' + jeton;
+    return APP.reseau.json(CFG.SYNC_URL, { method: 'POST', headers: headers, body: JSON.stringify(Object.assign({ action: action }, corps || {})), timeout: 20000 }).catch(function (e) {
+      if (e && e.corps && e.corps.json) return e.corps.json().catch(function () { return null; }).then(function (b) { throw erreurDe(e, b); });
+      throw erreurDe(e, null);
     });
   }
+
+  /* ------------------------------------------------------------------ session de membre */
+  var CLE_SESSION = 'hym.session', enRafraichissement = null;
+  function ecrireSession(r) {
+    var s = { access_token: r.access_token, refresh_token: r.refresh_token, expire: Date.now() + (r.expires_in || 3600) * 1000, email: r.email, nom: r.nom || '' };
+    try { localStorage.setItem(CLE_SESSION, JSON.stringify(s)); } catch (e) {}
+    return s;
+  }
+  APP.session = {
+    lire: function () { try { return JSON.parse(localStorage.getItem(CLE_SESSION) || 'null'); } catch (e) { return null; } },
+    effacer: function () { try { localStorage.removeItem(CLE_SESSION); } catch (e) {} },
+    active: function () { return !!APP.session.lire(); },
+    utilisateur: function () { var s = APP.session.lire(); return s ? { email: s.email, nom: s.nom } : null; },
+    connexion: function (email, mdp) { return appeler('login', { email: email, password: mdp }).then(ecrireSession); },
+    recuperer: function (email) { return appeler('recover', { email: email }); },
+    /** Jeton valide : renouvelé automatiquement quand il approche de son expiration. */
+    jeton: function () {
+      var s = APP.session.lire();
+      if (!s) { var e = new Error('Connexion requise.'); e.code = 'session'; return Promise.reject(e); }
+      if (Date.now() < s.expire - 90000) return Promise.resolve(s.access_token);
+      return APP.session.rafraichir().then(function (n) { return n.access_token; });
+    },
+    rafraichir: function () {
+      var s = APP.session.lire();
+      if (!s) { var e = new Error('Connexion requise.'); e.code = 'session'; return Promise.reject(e); }
+      if (enRafraichissement) return enRafraichissement;
+      enRafraichissement = appeler('refresh', { refresh_token: s.refresh_token }).then(ecrireSession, function (err) {
+        if (err.code === 'auth' || err.code === 'membre') { APP.session.effacer(); err.code = 'session'; err.message = 'Session expirée : reconnectez-vous.'; }
+        throw err;
+      }).finally(function () { enRafraichissement = null; });
+      return enRafraichissement;
+    },
+    changerMotDePasse: function (mdp) { return nuage('password', { password: mdp }); }
+  };
+
+  /** Appel authentifié : une session refusée est renouvelée une fois avant d'abandonner. */
+  function nuage(action, corps) {
+    var essai = function (reprise) {
+      return APP.session.jeton().then(function (j) { return appeler(action, corps, j); }).catch(function (e) {
+        if (e.code === 'auth' && !reprise) return APP.session.rafraichir().then(function () { return essai(true); });
+        if (e.code === 'auth') { APP.session.effacer(); e.code = 'session'; e.message = 'Session expirée : reconnectez-vous.'; }
+        throw e;
+      });
+    };
+    return essai(false);
+  }
+  APP.appelerFonction = appeler;
 
   APP.fenetreConflit = function () {
     var f = APP.fenetre('<div class="modale verre"><h2>Modifications concurrentes</h2><div class="aide">Un collègue a enregistré des changements pendant que vous travailliez. Pour ne rien écraser, exportez votre travail (Excel), rechargez la base, puis réappliquez vos modifications.</div>' +
@@ -166,18 +222,8 @@
     $('[data-rech]', f.el).addEventListener('click', function () { S.recharger().then(function () { f.fermer(); APP.toast('Base rechargée.'); APP.tout.rendre(); }, function (e) { APP.toast(e.message, 'err'); }); });
   };
 
-  /* ------------------------------------------------------------------ accès par mot de passe d'équipe (empreinte PBKDF2-SHA256, comme la version Streamlit) */
-  var ACCES = { sel: '272ff44ec0272c516b1a516bbc76abe0', empreinte: '37a0061896b698156997ea56804eb3cd3d8f64756816db28419bcdb51e28f70d', iterations: 600000 };
-  function hex2bytes(h) { var a = new Uint8Array(h.length / 2); for (var i = 0; i < a.length; i++) a[i] = parseInt(h.substr(i * 2, 2), 16); return a; }
-  function bytes2hex(b) { return [].map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
-  APP.motDePasseValide = function (saisi) {
-    if (!(window.crypto && crypto.subtle)) return Promise.reject(new Error('Ce navigateur ne permet pas la vérification sécurisée (page non sécurisée).'));
-    return crypto.subtle.importKey('raw', new TextEncoder().encode(saisi), 'PBKDF2', false, ['deriveBits']).then(function (k) {
-      return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: hex2bytes(ACCES.sel), iterations: ACCES.iterations, hash: 'SHA-256' }, k, 256);
-    }).then(function (bits) { return bytes2hex(bits) === ACCES.empreinte; });
-  };
-  APP.accesOk = function () { return sessionStorage.getItem('hym.acces') === ACCES.empreinte; };
-  APP.verrouiller = function () { sessionStorage.removeItem('hym.acces'); sessionStorage.removeItem('hym.pw'); location.reload(); };
+  /* ------------------------------------------------------------------ déconnexion */
+  APP.verrouiller = function () { APP.session.effacer(); location.reload(); };
 
   /* ------------------------------------------------------------------ onglets : pastille qui glisse, transition sans saccade */
   var ONGLETS = ['simulateur', 'grille', 'donnees', 'analyse'];

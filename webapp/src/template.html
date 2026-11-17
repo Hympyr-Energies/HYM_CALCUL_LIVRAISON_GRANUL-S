@@ -22,13 +22,37 @@
 <div class="bg" aria-hidden="true">{{FOND}}</div>
 
 <div class="porte" id="porte" hidden>
-  <form class="porte-carte verre verre--clair" id="porte-form" novalidate>
+  <div class="porte-carte verre verre--clair">
     <img class="logo" src="{{LOGO_FONCE}}" alt="Hympyr Granulés" width="204" height="34">
-    <div><h1>Cockpit granulés</h1><p style="margin-top:var(--s2)">Accès réservé à l'équipe. Utilisez le mot de passe transmis en interne.</p></div>
-    <div class="champ"><label for="porte-pw">Mot de passe</label><input class="saisie" id="porte-pw" type="password" autocomplete="current-password" aria-describedby="porte-err"></div>
-    <p class="porte-erreur" id="porte-err" role="alert"></p>
-    <button class="btn btn--main" id="porte-ok" type="submit">Se connecter</button>
-  </form>
+    <form id="f-conn" novalidate>
+      <div><h1>Cockpit granulés</h1><p style="margin-top:var(--s2)">Accès réservé aux membres de l'équipe. Connectez-vous avec votre compte.</p></div>
+      <p class="porte-info" id="f-conn-info" role="status"></p>
+      <div class="champ"><label for="c-email">Adresse e-mail</label><input class="saisie" id="c-email" type="email" autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false"></div>
+      <div class="champ"><label for="c-mdp">Mot de passe</label><input class="saisie" id="c-mdp" type="password" autocomplete="current-password"></div>
+      <p class="porte-erreur" role="alert"></p>
+      <button class="btn btn--main" id="c-ok" type="submit">Se connecter</button>
+      <button class="lien" id="c-oubli" type="button">Mot de passe oublié ?</button>
+    </form>
+    <form id="f-oubli" novalidate hidden>
+      <div><h1>Mot de passe oublié</h1><p style="margin-top:var(--s2)">Saisissez l'adresse e-mail de votre compte : vous recevrez un lien pour choisir un nouveau mot de passe.</p></div>
+      <div class="champ"><label for="o-email">Adresse e-mail</label><input class="saisie" id="o-email" type="email" autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false"></div>
+      <p class="porte-erreur" role="alert"></p>
+      <button class="btn btn--main" id="o-ok" type="submit">Envoyer le lien</button>
+      <button class="lien" id="o-retour" type="button">Retour à la connexion</button>
+    </form>
+    <form id="f-nouveau" novalidate hidden>
+      <div><h1>Nouveau mot de passe</h1><p style="margin-top:var(--s2)">Choisissez un mot de passe d'au moins 10 caractères.</p></div>
+      <div class="champ"><label for="n-mdp">Nouveau mot de passe</label><input class="saisie" id="n-mdp" type="password" autocomplete="new-password"></div>
+      <div class="champ"><label for="n-mdp2">Confirmer</label><input class="saisie" id="n-mdp2" type="password" autocomplete="new-password"></div>
+      <p class="porte-erreur" role="alert"></p>
+      <button class="btn btn--main" id="n-ok" type="submit">Enregistrer</button>
+    </form>
+    <div id="f-charge" hidden>
+      <div id="ch-etat" class="porte-charge"><span class="chargement" aria-hidden="true"></span><p>Chargement des données de l'équipe…</p></div>
+      <p class="porte-erreur" id="ch-err" role="alert"></p>
+      <button class="btn btn--main" id="ch-retour" type="button" hidden>Réessayer</button>
+    </div>
+  </div>
 </div>
 
 <header class="hd verre" id="hd">

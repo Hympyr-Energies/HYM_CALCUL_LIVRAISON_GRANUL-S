@@ -333,6 +333,15 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
 @media (max-width:1100px){#p-donnees .grille2{grid-template-columns:minmax(0,1fr)!important}}
 .porte-carte .porte-erreur{color:#A33A2A;font-weight:500}
 
+.porte-carte form,.porte-carte #f-charge{display:grid;gap:var(--s5)}
+.porte-carte .champ>label{text-align:left}
+.porte-info{color:#1F704F!important;font-weight:500;min-height:0}
+.porte-info:empty{display:none}
+.lien{background:none;border:0;padding:var(--s2);color:var(--action);font-weight:600;font-size:var(--small);cursor:pointer;text-decoration:underline;text-underline-offset:calc(var(--k)*3)}
+.lien:hover{color:var(--brun)}
+.porte-charge{display:grid;justify-items:center;gap:var(--s3);padding:var(--s5) 0;color:var(--gris)}
+.porte-charge .chargement{width:calc(var(--k)*28);height:calc(var(--k)*28);border-color:rgba(61,36,8,.2);border-top-color:var(--action)}
+
 </style>
 </head>
 <body>
@@ -342,13 +351,37 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
 <div class="bg" aria-hidden="true"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><ellipse cx="735" cy="54" rx="13.0" ry="6.1" transform="rotate(61 735 54)" fill="#6B4220" opacity="0.15"/><ellipse cx="1011" cy="419" rx="12.9" ry="7.0" transform="rotate(131 1011 419)" fill="#DDA771" opacity="0.21"/><ellipse cx="1230" cy="640" rx="18.5" ry="5.9" transform="rotate(127 1230 640)" fill="#CB7A28" opacity="0.25"/><ellipse cx="1155" cy="83" rx="12.6" ry="6.1" transform="rotate(84 1155 83)" fill="#CB7A28" opacity="0.24"/><ellipse cx="577" cy="302" rx="16.3" ry="4.7" transform="rotate(137 577 302)" fill="#98612A" opacity="0.25"/><ellipse cx="725" cy="32" rx="13.6" ry="4.9" transform="rotate(67 725 32)" fill="#CB7A28" opacity="0.15"/><ellipse cx="1170" cy="577" rx="19.2" ry="5.3" transform="rotate(147 1170 577)" fill="#98612A" opacity="0.09"/><ellipse cx="1389" cy="547" rx="14.3" ry="5.3" transform="rotate(4 1389 547)" fill="#CB7A28" opacity="0.24"/><ellipse cx="141" cy="442" rx="11.6" ry="6.3" transform="rotate(115 141 442)" fill="#6B4220" opacity="0.24"/><ellipse cx="1279" cy="696" rx="19.0" ry="5.2" transform="rotate(20 1279 696)" fill="#98612A" opacity="0.16"/><ellipse cx="780" cy="212" rx="15.9" ry="4.7" transform="rotate(26 780 212)" fill="#CB7A28" opacity="0.25"/><ellipse cx="48" cy="308" rx="17.3" ry="5.9" transform="rotate(146 48 308)" fill="#98612A" opacity="0.24"/><ellipse cx="1468" cy="678" rx="15.9" ry="6.1" transform="rotate(60 1468 678)" fill="#CB7A28" opacity="0.16"/><ellipse cx="265" cy="562" rx="20.0" ry="6.3" transform="rotate(145 265 562)" fill="#DDA771" opacity="0.17"/><ellipse cx="518" cy="398" rx="19.9" ry="4.8" transform="rotate(34 518 398)" fill="#DDA771" opacity="0.24"/><ellipse cx="1260" cy="659" rx="18.9" ry="6.7" transform="rotate(62 1260 659)" fill="#6B4220" opacity="0.15"/><ellipse cx="153" cy="647" rx="19.6" ry="4.0" transform="rotate(176 153 647)" fill="#6B4220" opacity="0.08"/><ellipse cx="16" cy="652" rx="17.4" ry="5.4" transform="rotate(125 16 652)" fill="#DDA771" opacity="0.09"/><ellipse cx="1553" cy="417" rx="14.4" ry="4.3" transform="rotate(10 1553 417)" fill="#6B4220" opacity="0.22"/><ellipse cx="936" cy="418" rx="18.9" ry="5.5" transform="rotate(164 936 418)" fill="#DDA771" opacity="0.24"/><ellipse cx="489" cy="156" rx="19.7" ry="5.3" transform="rotate(177 489 156)" fill="#6B4220" opacity="0.17"/><ellipse cx="1148" cy="245" rx="10.9" ry="5.4" transform="rotate(49 1148 245)" fill="#98612A" opacity="0.24"/><ellipse cx="801" cy="233" rx="11.6" ry="5.6" transform="rotate(139 801 233)" fill="#CB7A28" opacity="0.10"/><ellipse cx="1320" cy="842" rx="15.2" ry="4.6" transform="rotate(98 1320 842)" fill="#DDA771" opacity="0.12"/><ellipse cx="330" cy="390" rx="10.3" ry="4.4" transform="rotate(63 330 390)" fill="#6B4220" opacity="0.12"/><ellipse cx="92" cy="162" rx="10.6" ry="5.0" transform="rotate(169 92 162)" fill="#DDA771" opacity="0.11"/><ellipse cx="479" cy="846" rx="13.0" ry="4.4" transform="rotate(43 479 846)" fill="#6B4220" opacity="0.17"/><ellipse cx="134" cy="882" rx="14.7" ry="5.0" transform="rotate(59 134 882)" fill="#CB7A28" opacity="0.18"/><ellipse cx="1550" cy="601" rx="19.4" ry="4.4" transform="rotate(171 1550 601)" fill="#6B4220" opacity="0.17"/><ellipse cx="621" cy="290" rx="13.5" ry="5.3" transform="rotate(78 621 290)" fill="#DDA771" opacity="0.24"/><ellipse cx="333" cy="682" rx="16.8" ry="4.9" transform="rotate(21 333 682)" fill="#6B4220" opacity="0.21"/><ellipse cx="1557" cy="894" rx="16.1" ry="6.1" transform="rotate(0 1557 894)" fill="#6B4220" opacity="0.16"/><ellipse cx="1535" cy="690" rx="18.5" ry="4.1" transform="rotate(124 1535 690)" fill="#6B4220" opacity="0.19"/><ellipse cx="809" cy="208" rx="16.9" ry="6.0" transform="rotate(168 809 208)" fill="#98612A" opacity="0.12"/><ellipse cx="358" cy="217" rx="10.5" ry="5.8" transform="rotate(177 358 217)" fill="#CB7A28" opacity="0.22"/><ellipse cx="1446" cy="771" rx="13.3" ry="6.3" transform="rotate(65 1446 771)" fill="#CB7A28" opacity="0.15"/><ellipse cx="629" cy="627" rx="18.4" ry="4.2" transform="rotate(49 629 627)" fill="#6B4220" opacity="0.19"/><ellipse cx="719" cy="73" rx="18.6" ry="6.6" transform="rotate(174 719 73)" fill="#CB7A28" opacity="0.19"/><ellipse cx="546" cy="339" rx="15.9" ry="6.4" transform="rotate(134 546 339)" fill="#6B4220" opacity="0.10"/><ellipse cx="1059" cy="664" rx="14.8" ry="6.9" transform="rotate(176 1059 664)" fill="#CB7A28" opacity="0.17"/><ellipse cx="200" cy="2" rx="14.9" ry="5.3" transform="rotate(74 200 2)" fill="#DDA771" opacity="0.25"/><ellipse cx="1268" cy="5" rx="14.6" ry="5.9" transform="rotate(93 1268 5)" fill="#6B4220" opacity="0.15"/><ellipse cx="509" cy="761" rx="19.7" ry="5.1" transform="rotate(34 509 761)" fill="#CB7A28" opacity="0.17"/><ellipse cx="665" cy="189" rx="12.8" ry="6.2" transform="rotate(112 665 189)" fill="#98612A" opacity="0.08"/><ellipse cx="1249" cy="422" rx="13.3" ry="5.0" transform="rotate(129 1249 422)" fill="#CB7A28" opacity="0.09"/><ellipse cx="674" cy="585" rx="11.6" ry="6.1" transform="rotate(23 674 585)" fill="#6B4220" opacity="0.22"/><ellipse cx="229" cy="721" rx="13.0" ry="4.0" transform="rotate(29 229 721)" fill="#CB7A28" opacity="0.13"/><ellipse cx="1324" cy="270" rx="18.4" ry="6.7" transform="rotate(147 1324 270)" fill="#DDA771" opacity="0.19"/><ellipse cx="1344" cy="194" rx="12.6" ry="5.1" transform="rotate(109 1344 194)" fill="#6B4220" opacity="0.17"/><ellipse cx="339" cy="807" rx="16.8" ry="5.1" transform="rotate(40 339 807)" fill="#98612A" opacity="0.13"/><ellipse cx="1281" cy="181" rx="17.5" ry="5.9" transform="rotate(13 1281 181)" fill="#98612A" opacity="0.12"/><ellipse cx="213" cy="656" rx="10.2" ry="5.2" transform="rotate(29 213 656)" fill="#DDA771" opacity="0.14"/><ellipse cx="1295" cy="638" rx="11.7" ry="7.0" transform="rotate(128 1295 638)" fill="#DDA771" opacity="0.12"/><ellipse cx="299" cy="633" rx="13.5" ry="7.0" transform="rotate(170 299 633)" fill="#CB7A28" opacity="0.22"/><ellipse cx="1080" cy="875" rx="18.3" ry="5.8" transform="rotate(38 1080 875)" fill="#DDA771" opacity="0.14"/><ellipse cx="1500" cy="870" rx="15.9" ry="6.3" transform="rotate(63 1500 870)" fill="#DDA771" opacity="0.11"/><ellipse cx="1294" cy="350" rx="17.1" ry="6.6" transform="rotate(24 1294 350)" fill="#DDA771" opacity="0.18"/><ellipse cx="299" cy="666" rx="18.9" ry="6.1" transform="rotate(175 299 666)" fill="#DDA771" opacity="0.24"/><ellipse cx="854" cy="720" rx="10.6" ry="5.5" transform="rotate(67 854 720)" fill="#6B4220" opacity="0.18"/><ellipse cx="1209" cy="479" rx="13.1" ry="4.5" transform="rotate(150 1209 479)" fill="#98612A" opacity="0.17"/><ellipse cx="880" cy="315" rx="13.9" ry="4.9" transform="rotate(5 880 315)" fill="#98612A" opacity="0.09"/><ellipse cx="914" cy="189" rx="18.3" ry="5.0" transform="rotate(140 914 189)" fill="#6B4220" opacity="0.12"/><ellipse cx="1111" cy="649" rx="19.1" ry="5.1" transform="rotate(76 1111 649)" fill="#98612A" opacity="0.25"/><ellipse cx="811" cy="725" rx="11.1" ry="6.0" transform="rotate(178 811 725)" fill="#CB7A28" opacity="0.24"/><ellipse cx="639" cy="51" rx="15.5" ry="4.4" transform="rotate(164 639 51)" fill="#CB7A28" opacity="0.08"/><ellipse cx="1589" cy="111" rx="14.7" ry="6.3" transform="rotate(86 1589 111)" fill="#98612A" opacity="0.20"/><ellipse cx="128" cy="666" rx="16.4" ry="4.7" transform="rotate(131 128 666)" fill="#6B4220" opacity="0.10"/><ellipse cx="1096" cy="715" rx="15.4" ry="6.4" transform="rotate(150 1096 715)" fill="#6B4220" opacity="0.16"/><ellipse cx="1161" cy="286" rx="19.3" ry="6.7" transform="rotate(10 1161 286)" fill="#DDA771" opacity="0.13"/><ellipse cx="1212" cy="838" rx="16.6" ry="4.8" transform="rotate(149 1212 838)" fill="#6B4220" opacity="0.21"/><ellipse cx="412" cy="665" rx="19.3" ry="5.3" transform="rotate(91 412 665)" fill="#6B4220" opacity="0.23"/><ellipse cx="1012" cy="580" rx="16.9" ry="4.9" transform="rotate(76 1012 580)" fill="#DDA771" opacity="0.10"/><ellipse cx="1131" cy="753" rx="16.4" ry="5.1" transform="rotate(126 1131 753)" fill="#6B4220" opacity="0.14"/><ellipse cx="1365" cy="648" rx="18.8" ry="5.6" transform="rotate(130 1365 648)" fill="#CB7A28" opacity="0.20"/><ellipse cx="1564" cy="853" rx="11.9" ry="4.4" transform="rotate(66 1564 853)" fill="#98612A" opacity="0.17"/><ellipse cx="26" cy="175" rx="19.7" ry="4.6" transform="rotate(82 26 175)" fill="#CB7A28" opacity="0.25"/><ellipse cx="486" cy="658" rx="10.1" ry="4.8" transform="rotate(176 486 658)" fill="#6B4220" opacity="0.08"/><ellipse cx="283" cy="372" rx="14.8" ry="5.3" transform="rotate(15 283 372)" fill="#6B4220" opacity="0.26"/><ellipse cx="216" cy="579" rx="18.4" ry="7.0" transform="rotate(72 216 579)" fill="#DDA771" opacity="0.24"/><ellipse cx="393" cy="562" rx="12.6" ry="4.9" transform="rotate(151 393 562)" fill="#98612A" opacity="0.11"/><ellipse cx="555" cy="395" rx="14.7" ry="4.4" transform="rotate(137 555 395)" fill="#CB7A28" opacity="0.23"/><ellipse cx="1432" cy="575" rx="15.8" ry="4.0" transform="rotate(11 1432 575)" fill="#98612A" opacity="0.13"/><ellipse cx="1376" cy="771" rx="13.0" ry="4.8" transform="rotate(59 1376 771)" fill="#CB7A28" opacity="0.23"/><ellipse cx="1042" cy="742" rx="17.1" ry="6.1" transform="rotate(14 1042 742)" fill="#98612A" opacity="0.20"/><ellipse cx="517" cy="118" rx="11.6" ry="6.4" transform="rotate(82 517 118)" fill="#98612A" opacity="0.09"/><ellipse cx="1555" cy="105" rx="12.1" ry="5.1" transform="rotate(88 1555 105)" fill="#CB7A28" opacity="0.17"/><ellipse cx="820" cy="271" rx="12.7" ry="4.9" transform="rotate(10 820 271)" fill="#6B4220" opacity="0.24"/><ellipse cx="861" cy="753" rx="19.9" ry="6.4" transform="rotate(44 861 753)" fill="#98612A" opacity="0.09"/><ellipse cx="1441" cy="29" rx="19.6" ry="6.6" transform="rotate(171 1441 29)" fill="#CB7A28" opacity="0.15"/><ellipse cx="130" cy="216" rx="18.1" ry="6.9" transform="rotate(86 130 216)" fill="#CB7A28" opacity="0.11"/><ellipse cx="282" cy="8" rx="16.2" ry="5.6" transform="rotate(94 282 8)" fill="#DDA771" opacity="0.24"/><ellipse cx="1285" cy="32" rx="18.3" ry="6.1" transform="rotate(177 1285 32)" fill="#98612A" opacity="0.16"/><ellipse cx="1338" cy="842" rx="16.5" ry="5.2" transform="rotate(51 1338 842)" fill="#6B4220" opacity="0.15"/><ellipse cx="749" cy="827" rx="14.0" ry="6.1" transform="rotate(48 749 827)" fill="#DDA771" opacity="0.15"/><ellipse cx="11" cy="518" rx="11.0" ry="6.2" transform="rotate(168 11 518)" fill="#DDA771" opacity="0.10"/><ellipse cx="1141" cy="203" rx="10.4" ry="6.8" transform="rotate(75 1141 203)" fill="#6B4220" opacity="0.18"/><ellipse cx="1546" cy="95" rx="17.3" ry="6.8" transform="rotate(140 1546 95)" fill="#98612A" opacity="0.19"/><ellipse cx="483" cy="617" rx="12.2" ry="5.5" transform="rotate(145 483 617)" fill="#6B4220" opacity="0.10"/><ellipse cx="1520" cy="724" rx="12.9" ry="4.1" transform="rotate(109 1520 724)" fill="#DDA771" opacity="0.17"/><ellipse cx="879" cy="37" rx="14.2" ry="5.1" transform="rotate(169 879 37)" fill="#6B4220" opacity="0.17"/><ellipse cx="95" cy="566" rx="15.9" ry="5.9" transform="rotate(73 95 566)" fill="#CB7A28" opacity="0.19"/><ellipse cx="742" cy="335" rx="17.1" ry="4.4" transform="rotate(115 742 335)" fill="#98612A" opacity="0.09"/><ellipse cx="953" cy="280" rx="13.1" ry="6.1" transform="rotate(109 953 280)" fill="#DDA771" opacity="0.14"/><ellipse cx="54" cy="693" rx="16.4" ry="6.0" transform="rotate(146 54 693)" fill="#98612A" opacity="0.26"/><ellipse cx="783" cy="186" rx="18.5" ry="6.0" transform="rotate(31 783 186)" fill="#DDA771" opacity="0.24"/><ellipse cx="1180" cy="3" rx="14.6" ry="6.6" transform="rotate(141 1180 3)" fill="#DDA771" opacity="0.18"/><ellipse cx="1332" cy="492" rx="16.1" ry="6.0" transform="rotate(79 1332 492)" fill="#98612A" opacity="0.24"/><ellipse cx="98" cy="406" rx="13.1" ry="5.8" transform="rotate(104 98 406)" fill="#98612A" opacity="0.16"/><ellipse cx="148" cy="487" rx="19.9" ry="5.9" transform="rotate(74 148 487)" fill="#6B4220" opacity="0.24"/><ellipse cx="782" cy="430" rx="16.0" ry="6.5" transform="rotate(72 782 430)" fill="#6B4220" opacity="0.21"/><ellipse cx="9" cy="212" rx="16.7" ry="4.8" transform="rotate(78 9 212)" fill="#98612A" opacity="0.15"/><ellipse cx="1067" cy="436" rx="11.1" ry="6.1" transform="rotate(112 1067 436)" fill="#DDA771" opacity="0.13"/><ellipse cx="1319" cy="365" rx="12.2" ry="4.0" transform="rotate(136 1319 365)" fill="#6B4220" opacity="0.11"/><ellipse cx="1217" cy="304" rx="14.4" ry="4.4" transform="rotate(161 1217 304)" fill="#6B4220" opacity="0.14"/><ellipse cx="1295" cy="842" rx="14.8" ry="5.1" transform="rotate(105 1295 842)" fill="#DDA771" opacity="0.12"/><ellipse cx="1360" cy="400" rx="12.8" ry="6.1" transform="rotate(45 1360 400)" fill="#DDA771" opacity="0.08"/><ellipse cx="961" cy="708" rx="12.4" ry="6.3" transform="rotate(95 961 708)" fill="#DDA771" opacity="0.17"/><ellipse cx="1060" cy="75" rx="14.7" ry="6.6" transform="rotate(154 1060 75)" fill="#6B4220" opacity="0.25"/><ellipse cx="488" cy="463" rx="12.8" ry="5.4" transform="rotate(86 488 463)" fill="#DDA771" opacity="0.23"/><ellipse cx="734" cy="390" rx="13.3" ry="6.1" transform="rotate(176 734 390)" fill="#DDA771" opacity="0.13"/></svg></div>
 
 <div class="porte" id="porte" hidden>
-  <form class="porte-carte verre verre--clair" id="porte-form" novalidate>
+  <div class="porte-carte verre verre--clair">
     <img class="logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjc4MiIgaGVpZ2h0PSI0NTciIHZpZXdCb3g9IjI0IDIyMCAyNzgyIDQ1NyIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjI7Ij48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwxLC04Mjk5LjM1MjQ2OCwtMjg0Mi45NDUzMTUpIj48ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLjI1NDM3MywwLDAsMC40ODk2OTYsOTY4MS4wNjY2OTQsMzU2My42ODUzNSkiPjxyZWN0IHg9Ii01NDMxLjg0NCIgeT0iLTE0NzEuODEzIiB3aWR0aD0iMTExMzAuNzAyIiBoZWlnaHQ9IjE4MzEuNTM3IiBzdHlsZT0iZmlsbDpub25lOyIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDAuODM3MTQ2LDAsMCwwLjQzNDg1NiwtNTM3Mi4yNzcwNDgsLTEwNDguOTYwMjk5KSI+PHBhdGggZD0iTTE5MjQuNzM0LDE1OS44NTFDMjAxMy4yNjUsMTU5Ljg1MSAyMDg1LjAzNCwyMzEuNjIgMjA4NS4wMzQsMzIwLjE1MUwyMDg1LjAzNCwxOTQ2Ljg3OUMyMDg1LjAzNCwyMDM1LjQxIDIwMTMuMjY1LDIxMDcuMTc5IDE5MjQuNzM0LDIxMDcuMTc5TDI5OC4wMDYsMjEwNy4xNzlDMjA5LjQ3NSwyMTA3LjE3OSAxMzcuNzA2LDIwMzUuNDEgMTM3LjcwNiwxOTQ2Ljg3OUwxMzcuNzA2LDMyMC4xNTFDMTM3LjcwNiwyMzEuNjIgMjA5LjQ3NSwxNTkuODUxIDI5OC4wMDYsMTU5Ljg1MUwxOTI0LjczNCwxNTkuODUxWk0xMjI0LjQyMiw0NzBDMTE5MS4zMzMsNDcwIDExNjQuNDkzLDQ5NS4yMzcgMTE2NC40OTMsNTI2LjM1OUMxMTY0LjQ5Myw1NTcuNDg1IDExOTEuMzMzLDU4Mi43MTMgMTIyNC40MjIsNTgyLjcxM0MxMjU3LjUyOCw1ODIuNzEzIDEyODQuMzQ2LDU1Ny40ODUgMTI4NC4zNDYsNTI2LjM1OUMxMjg0LjM0Niw0OTUuMjM3IDEyNTcuNTI4LDQ3MCAxMjI0LjQyMiw0NzBaTTEyODEuODA5LDExMDcuMDM2QzEyODUuMTEsMTEyMS44ODkgMTI4Ni44MywxMTM2Ljk1NSAxMjg2Ljg0NywxMTUyLjE5OUMxMjg2Ljg1MiwxMTU1LjU5OSAxMjg2LjczLDExNTguOTk1IDEyODYuNTY1LDExNjIuMzgzQzEyOTcuNTYxLDExNjMuMTM5IDEzMDguNDU0LDExNjQuMDk0IDEzMTkuMjU5LDExNjUuMjQxTDE0MDAuOTg1LDEwOTEuMzMyQzEzNjIuNzAxLDEwOTkuMTcxIDEzMjMuMTE5LDExMDQuNDQzIDEyODEuODA5LDExMDcuMDM2Wk0xMTcwLjY5NCw5NDEuMzE3QzEyMDcuNjkyLDk3Mi43NzQgMTIzNi42NDIsMTAwNi40MTggMTI1Ni40MDcsMTA0MS43QzEyNjguMTU5LDk1MC4zNjIgMTI5Ny45Myw4NTcuOTgzIDEzNDAuNzMsNzgxLjUyNUMxMzQ5LjI1MSw3NjYuMzEyIDEzNTcuNjgxLDc1MS40NjggMTM2Ni41MDYsNzM3LjQ3OUMxMzcwLjc5Nyw3MzAuNjc4IDEzODguMDEyLDcwNi42NjYgMTM5Mi43NTUsNjk3Ljg4TDEwNTQuMjI0LDY5Ny44OEMxMDY0LjM2MSw3MTYuMTYgMTEzMi43NDEsODAyLjA1NSAxMTcwLjY5NCw5NDEuMzE3Wk04OTkuMzI4LDE3MDkuNjhDOTMyLjQzNSwxNzA5LjkwNiA5NTkuNDU3LDE2ODQuODYxIDk1OS42ODcsMTY1My43MzlDOTU5LjkyNiwxNjIyLjYxMyA5MzMuMjkxLDE1OTcuMjAyIDkwMC4xOTMsMTU5Ni45NzZDODkwLjIxMiwxNTk2LjkxIDg4MC43NzUsMTU5OS4xNDMgODcyLjQ4LDE2MDMuMTQ3TDg0Ny41MjEsMTYyNS43MTdDODQyLjcsMTYzMy43NjkgODM5LjkxNiwxNjQzLjAzMiA4MzkuODM4LDE2NTIuOTNDODM5LjYwOCwxNjg0LjA1MiA4NjYuMjQzLDE3MDkuNDY0IDg5OS4zMjgsMTcwOS42OFpNMTIyMC42MywxNzk3LjAzQzEyNTMuNzI0LDE3OTcuMjUxIDEyODAuNzQ1LDE3NzIuMjAxIDEyODAuOTg4LDE3NDEuMDc5QzEyODEuMjIzLDE3MDkuOTUzIDEyNTQuNTg3LDE2ODQuNTQ3IDEyMjEuNDk0LDE2ODQuMzIxQzExODguMzkyLDE2ODQuMSAxMTYxLjM3NSwxNzA5LjE1IDExNjEuMTQsMTc0MC4yNzJDMTE2MC45MDEsMTc3MS4zOTMgMTE4Ny41NCwxNzk2LjgwOSAxMjIwLjYzLDE3OTcuMDNaTTE1NDIuOTc0LDE3MTMuNTY3QzE1NzYuMDc2LDE3MTMuNzc1IDE2MDMuMDg5LDE2ODguNzI5IDE2MDMuMzI0LDE2NTcuNjEyQzE2MDMuNTY4LDE2MjYuNDg2IDE1NzYuOTIzLDE2MDEuMDcxIDE1NDMuODMsMTYwMC44NThDMTUxMC43NDEsMTYwMC42MzIgMTQ4My43MTksMTYyNS42NzggMTQ4My40ODQsMTY1Ni44MDRDMTQ4My4yNDksMTY4Ny45MjYgMTUwOS44NzYsMTcxMy4zMzIgMTU0Mi45NzQsMTcxMy41NjdaTTE0NzkuNDc5LDY5Ny44OEMxNDQ1LjU4Miw3MzguNjEzIDE0MTEuMzYzLDc5MS44NSAxMzg5Ljg5Niw4MzYuODk1QzEzNjcuMDIyLDg4NC44OCAxMzI4Ljc4Miw5ODcuMTA1IDEzMjguMDM5LDEwMzkuNzE2QzEzODcuODM4LDEwMzMuOTQgMTQ1My41OSwxMDE1LjAyMiAxNTA4LjE4Niw5OTQuMzcxTDE4MzYuMDI0LDY5Ny44OEwxNDc5LjQ3OSw2OTcuODhaTTEyMzkuOTMxLDYwOC4xODRDMTI1MC4xMzIsNjMwLjQxOSAxMjc3LjczNyw2NTQuOTE5IDEyOTkuMjc4LDY2OC4xNTZDMTMwNC40NDIsNjcxLjMzMSAxMzA5LjcyNyw2NzQuMjQxIDEzMTUuMTc4LDY3Ni44NzJMMTQ5Ni42ODgsNjc2Ljg3MkwxNDk3LjAyMiw2NzYuNDM4QzE0NzkuMjUxLDY2MS44MTUgMTQ2NC45MzYsNjQ3Ljc0NCAxNDYzLjgwNyw2MTQuNTg1QzE0NTEuNzc3LDYxOS4wMjQgMTQ0NS43MzYsNjI3LjQ2NiAxNDE4LjQyNyw2MzIuNTk1QzEzODQuMTMxLDYzOS4wNCAxMzQyLjg2NCw2MjguNzczIDEzMjAuNDQ5LDYwNy41MTRDMTI5NC4xMzUsNTgyLjU0NiAxMzA1LjQ4Myw1ODkuMTM5IDEyOTEuODIsNTcyLjI4NEMxMjg2LjI3OCw1NzcuMDA5IDEyNzkuNjM4LDU5Mi4zODggMTI1Ni4yODYsNjAyLjI5QzEyNTEuMDY2LDYwNC41MDkgMTI0NC4zMDgsNjA1LjYyNSAxMjM5LjkzMSw2MDguMTg0Wk05ODMuMDI1LDYxNC40NzRDOTgyLjMzLDYzNi43MDYgOTc3LjI1LDY0Ny42NjIgOTY0LjE3Myw2NjMuNjIyQzk2Mi4wMzYsNjY2LjIzNiA5NjEuNDk4LDY2Ni45MzYgOTU4LjgzNSw2NjkuMTAzQzk1Ny43MDEsNjcwLjAzMiA5NTYuNTU1LDY3MC43NCA5NTUuNzIxLDY3MS40NDhMOTUyLjIxNiw2NzUuMTMxTDk1My42NTgsNjc2Ljg3M0wxMTMxLjUwNyw2NzYuODczQzExMzcuMDc5LDY3NC4yNDEgMTE0Mi40NzcsNjcxLjM0OSAxMTQ3LjczMiw2NjguMjM1QzExNjUuNDQzLDY1Ny43MDMgMTE5OC45MDUsNjI4LjA3MSAxMjA2Ljc3LDYwOC4xODVDMTIwMi41ODgsNjA1LjU5NyAxMTk1LjcwNCw2MDQuNDggMTE5MC41NjIsNjAyLjI5NkMxMTY3LjEzNiw1OTIuMzY4IDExNjEuMTY0LDU3Ny42MjggMTE1NS4wMzYsNTcyLjI3M0MxMTQwLjI1Nyw1ODkuOTE0IDExNTMuOTUsNTgwLjkzNyAxMTI2Ljk5OCw2MDYuNzU2QzExMTcuNTA0LDYxNS44NDYgMTEwMi4yOTUsNjI0LjMxNSAxMDg2LjY3Myw2MjkuMjE0QzEwNjkuMTQ5LDYzNC43MDggMTA0OS4wNDEsNjM2LjM0NSAxMDI5LjcyNCw2MzIuODYyQzEwMDEuMjIxLDYyNy43MTYgOTk3LjUyNiw2MjAuMjI3IDk4My4wMjUsNjE0LjQ3NFpNMTA1Ni45LDE0NDAuNTk3QzEwNDMuMjY3LDE0NjguMzkyIDEwMjYuOTI1LDE0OTMuNzMgMTAxMS4zNjQsMTUxNy45MTZDMTAwMi44MTMsMTUzMS4xODggOTkyLjU1NSwxNTQ0LjYzOCA5ODIuOTc4LDE1NTYuODMzTDk1Mi4yOTEsMTU5My45NTdDOTUyLjQ4MiwxNTk0LjI0OCA5NTIuODMsMTU5NC4zMDkgOTUyLjkzNCwxNTk0Ljc2TDk1NC4yOCwxNTk2LjI4Qzk2MS4yMTEsMTYwMi44NjggOTY2Ljc3OSwxNjA1Ljc5NSA5NzMuNzkzLDE2MTguNzMzQzk4MC42MjQsMTYzMS4zNjIgOTgyLjc5MiwxNjQwLjU4NyA5ODIuOTg3LDE2NTYuMTI2Qzk5OC4zMjYsMTY0OC42MDQgMTAwNi40NTYsMTY0MS40NDIgMTAyNy44MiwxNjM3LjExN0MxMDQ3LjgzMiwxNjMzLjA2MSAxMDY2LjYwMywxNjMzLjc5NSAxMDg1Ljk5LDE2MzkuMjIzQzExMTUuMzQsMTY0Ny40MzYgMTEzOC40MzYsMTY2Ni4yODQgMTE1Mi45MjQsMTY5MC40NDRDMTE1My40NDksMTY5MS4zMjEgMTE1My44MjMsMTY5Mi4wMiAxMTU0LjUsMTY5Mi45NUMxMTU2Ljk2MiwxNjk2LjMyOSAxMTU0LjkzNCwxNjkzLjg0IDExNTYuNDM3LDE2OTUuMTkxQzExNjUuNzM1LDE2ODUuNjE5IDExNjUuNjkyLDE2ODIuMjAxIDExNzcuNDg3LDE2NzQuMTMyQzExODUuODg2LDE2NjguMzkxIDExOTYuNDgzLDE2NjMuNDA1IDEyMDguODI2LDE2NjEuNTg5QzEyMDIuMDM4LDE2NDEuMjgxIDExNjkuOSwxNjEzLjA5MSAxMTQ5LjI3MSwxNjAwLjY4M0MxMTIxLjE1LDE1ODMuNzU4IDEwOTMuNDcyLDE1NzUuNDI5IDEwNTMuMjIyLDE1NzMuNzEzQzEwNTMuOTMsMTU3MC4zNzggMTA3Ni4zMjIsMTUzNy44NDkgMTA4MC4zMzUsMTUzMS41NTFDMTEwOC42NjksMTQ4Ny4xNzkgMTEzMC42MTQsMTQ0Mi4xMiAxMTQ5LjczMSwxMzkyLjA3NkMxMTUxLjc0MiwxMzg2LjgxNyAxMTUzLjY5NiwxMzgxLjQ3NSAxMTU1LjU5OCwxMzc2LjA1OUMxMTI2Ljc5MSwxMzk4Ljg1NSAxMDkzLjc1LDE0MjAuNDUgMTA1Ni45LDE0NDAuNTk3Wk0xNjkwLjU4MSwxMjk0LjkzNEMxNjg0LjE3OSwxMjkzLjIyOCAxNjU0Ljk5MywxMjc0LjEzNiAxNjQ1LjY5OSwxMjY5LjA1MUMxNTUzLjQ4NSwxMjE4LjU2OCAxNDU3LjE3OSwxMTg0LjYxNSAxMzUyLjExLDExNjkuMzY3TDEyNjMuNTcsMTI0OS40NDdDMTI2Mi41MTksMTI1MS42MSAxMjYxLjQ5LDEyNTMuNzY4IDEyNjAuMzc4LDEyNTUuOTA5QzEyOTIuMDksMTQ0Ni43NTcgMTM5MS45MTgsMTU2My43NzggMTM5My43NTUsMTU3My43MzdDMTM0NC43ODQsMTU3Ni4yMzQgMTI5NC43MTMsMTU5Ni42MiAxMjY2LjY1NCwxNjI4LjAwN0MxMjU5LjQ0OSwxNjM2LjA2OCAxMjQ2LjU1NSwxNjUwLjUyMSAxMjQxLjQzNCwxNjYyLjI0M0MxMjU4LjMyNCwxNjY1LjUxOCAxMjcyLjg5OSwxNjc0Ljc3MiAxMjgzLjA3LDE2ODYuMjAzTDEyOTMuNzIzLDE2OTkuMzkzQzEzMTAuNzkxLDE2NTYuMzggMTM2NS4yMjYsMTYyNy41NiAxNDE3LjM5NCwxNjM2LjA2OEMxNDM5LjIzLDE2MzkuNjM0IDE0NDcuNjM4LDE2NDUuMDggMTQ2My43NjQsMTY1NC41MjFDMTQ2NS4zMzIsMTYyMC45MjggMTQ3OC44MTIsMTYwNy42MTcgMTQ5Ni45OTIsMTU5Mi42NDJMMTQ2Ny4zODYsMTU1Ni4xODdDMTQzNS41NTIsMTUxNC4zMzQgMTQxNS40MDUsMTQ4My4zMjUgMTM5MC43NTksMTQzNC4wMDZDMTM2My4xNzIsMTM3OC43OTggMTMzNi41NSwxMzAxLjM5OCAxMzI4LjIyNSwxMjMzLjA1N0MxMzg4LjAzMiwxMjM3LjA0OCAxNDk0LjA0LDEyNjkuMzEyIDE1NDEsMTI5MS4zOTZDMTYwMC4wODIsMTMxOS4xNzQgMTY0MC40OTgsMTM0MC4xNDIgMTY5MC44MiwxMzc3LjUzQzE2OTUuMDExLDEzODAuNjQ4IDE3MDYuNzQ2LDEzOTAuMDQ2IDE3MTAuNTQxLDEzOTEuNzE4QzE3MjguOTYsMTM3My40NTYgMTc0MS43NzEsMTM2MS4zIDE3NzYuNTQ2LDEzNjAuNjQ4QzE3NjguMzE2LDEzNDUuODgyIDE3NjEuNTE5LDEzMzcuODIxIDE3NTcuMTk4LDEzMTcuNjE4QzE3NTMuMzgxLDEyOTkuNzY4IDE3NTUuMzE3LDEyNzkuODI1IDE3NjAuOTcyLDEyNjMuMzU3QzE3NzYuNzUsMTIxNy40MTMgMTgxMi44OTIsMTIwNi4wMTcgMTgyMS41NzgsMTE5OC44NTlDMTgxNi41NTgsMTE5My42NDcgMTgwMC43OTMsMTE4OC4wMSAxNzg5LjgxOCwxMTY2LjM1NkMxNzg3LjQxNiwxMTYxLjYxMyAxNzg2LjA0NCwxMTU0LjMgMTc4My4xMTcsMTE1MC4yMTNDMTc2Mi43MDksMTE1Ny41NjEgMTczMS4wNzksMTE4OC4xNTMgMTcxOS4zMTksMTIwNS43NjRDMTcwMi4zMjUsMTIzMS4yMDkgMTY5Mi4zMTIsMTI1OC4zNzkgMTY5MC41ODEsMTI5NC45MzRaTTE0NTEuNzY5LDEwNzkuMjRDMTUyNy4wMDcsMTA1OC43NTQgMTU5Ny42OTIsMTAyNy45MzMgMTY2Ny4zMzYsOTg3LjU3NEMxNjcyLjU2OSw5ODQuNTUxIDE2ODUuMjE2LDk3NS4yMTQgMTY5MC41NjcsOTc0LjI0MUMxNjkzLjExNiwxMDI1Ljk1NyAxNzEyLjIyNSwxMDYyLjQ0NyAxNzQ3LjU1NiwxMDk0LjUxNUMxNzU2LjE3MiwxMTAyLjMzMiAxNzcwLjIzNSwxMTE0LjIzMiAxNzgzLjExNiwxMTE4Ljg0NEMxNzkyLjkyNywxMTA0Ljk2NCAxNzgzLjM1MSwxMDk3LjY5NCAxODE4LjE1NSwxMDcyLjkzTDE4MjEuMzM4LDEwNzAuMjI0QzE4MDYuMzk0LDEwNTkuMTEgMTgwOS45OTgsMTA2Ny4yMzIgMTc4NC41NDQsMTA0My45NjJDMTc3Ni4yODQsMTAzNi40MDUgMTc2NS43MDksMTAxOS41MTUgMTc2MC45NywxMDA1LjczMUMxNzU1LjQyNCw5ODkuNjA2IDE3NTMuNTQ4LDk3MC4wMzIgMTc1Ni45NjYsOTUyLjU3N0MxNzYxLjE1Nyw5MzEuMTIzIDE3NjguMjcxLDkyMy45MzkgMTc3Ni41NTMsOTA4LjQyMkMxNzU0LjkyNSw5MDguMDM1IDE3MzEuMzc3LDkwMC4wMTggMTcxOC4yODgsODg1Ljc2OUMxNzE3LjIzNyw4ODQuNjIyIDE3MTYuNjIsODgzLjY4IDE3MTUuODA4LDg4Mi44MDdDMTcxNS41MzksODgyLjUxMiAxNzE0LjcxNCw4ODEuNjQzIDE3MTQuNDIzLDg4MS4zODdDMTcxMi40OTUsODc5LjU5OCAxNzE0LjE4OCw4ODAuNzYyIDE3MTEuOTM5LDg3OS40NjNMMTY3My4xMzUsOTA3LjczNkMxNjQxLjg1Myw5MjguNjA4IDE2MTMuMDE1LDk0Ni42MDYgMTU4MC4xNjEsOTYzLjEwOUwxNDUxLjc2OSwxMDc5LjI0Wk0yOTQuODk1LDY5Ny41NDFMMjk0Ljg5NSw2OTcuNzQ2QzYxNC44NTUsNzAxLjQ2OCA4OTcuOTk1LDc3MC45NTkgMTA3OS4wMzIsODc3LjA2N0MxMDYwLjIyMyw4MzIuNDkxIDEwMzYuOTQ5LDc5MC4xMzQgMTAxMS4yOTksNzUxLjI0N0MxMDAyLjI0NCw3MzcuNTE5IDk5Mi44MzcsNzI1LjIxOSA5ODIuOTE4LDcxMi4zMTJMOTcwLjk5Miw2OTcuODhMMjk0Ljg5NSw2OTcuNTQxWk0xODM3LjkzMyw4MzAuOTUzQzE4MzguMDQsODAyLjk1NCAxODE2LjQxOCw3NzkuNjU0IDE3ODcuOTY3LDc3NS4xNzJMMTcxOC41NzUsODM3LjkzN0MxNzIyLjMyMyw4NjUuNTg4IDE3NDcuMzY0LDg4Ny4wMDggMTc3Ny44MDQsODg3LjExMkMxODEwLjg5Myw4ODcuMjE2IDE4MzcuODE5LDg2Mi4wNzUgMTgzNy45MzMsODMwLjk1M1pNOTAyLjcyNSw1NTUuNjM1Qzg2OS42MzYsNTU1LjYzNSA4NDIuNzk2LDU4MC44NzIgODQyLjc5Niw2MTEuOTk0Qzg0Mi43OTYsNjQzLjExNSA4NjkuNjM2LDY2OC4zNDggOTAyLjcyNSw2NjguMzQ4QzkzNS44MTQsNjY4LjM0OCA5NjIuNjQ5LDY0My4xMTYgOTYyLjY0OSw2MTEuOTk0Qzk2Mi42NDksNTgwLjg3MiA5MzUuODE0LDU1NS42MzUgOTAyLjcyNSw1NTUuNjM1Wk0xOTI3Ljg0NSwxMTMzLjgwMkMxOTI3Ljk1NywxMTAyLjY3NSAxOTAxLjIzMSwxMDc3LjM0NyAxODY4LjEzMywxMDc3LjI0M0MxODM1LjAzNSwxMDc3LjEzNCAxODA4LjExOCwxMTAyLjI3MSAxODA3Ljk5NiwxMTMzLjM5M0MxODA3Ljg4NCwxMTY0LjUyNCAxODM0LjYxNSwxMTg5LjgzOSAxODY3LjcwOCwxMTg5Ljk1MkMxOTAwLjgwNiwxMTkwLjA3IDE5MjcuNzI4LDExNjQuOTI0IDE5MjcuODQ1LDExMzMuODAyWk0xODM2LjExNywxNDM2LjI3N0MxODM2LjIzOCwxNDA1LjE0MiAxODA5LjUsMTM3OS44MjcgMTc3Ni40MTUsMTM3OS43MThDMTc0My4zMTcsMTM3OS42MDUgMTcxNi4zOSwxNDA0Ljc1MSAxNzE2LjI3MywxNDM1Ljg3M0MxNzE2LjE0NywxNDY3IDE3NDIuODg3LDE0OTIuMzE5IDE3NzUuOTg5LDE0OTIuNDMyQzE4MDkuMDc4LDE0OTIuNTQgMTgzNi4wMDQsMTQ2Ny4zOTkgMTgzNi4xMTcsMTQzNi4yNzdaTTE1NDYuMzcxLDU1NS4xODNDMTUxMy4yODcsNTU1LjE4MyAxNDg2LjQ0Nyw1ODAuNDAzIDE0ODYuNDQ3LDYxMS41MjlDMTQ4Ni40NDcsNjQyLjY1MSAxNTEzLjI4Niw2NjcuODg4IDE1NDYuMzcxLDY2Ny44ODhDMTU3OS40NzcsNjY3Ljg4OCAxNjA2LjMwOCw2NDIuNjUxIDE2MDYuMzA4LDYxMS41MjlDMTYwNi4zMDgsNTgwLjQwMyAxNTc5LjQ3Nyw1NTUuMTgzIDE1NDYuMzcxLDU1NS4xODNaIiBzdHlsZT0iZmlsbDojQ0I3QTI4OyIvPjwvZz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLjUxMjk5MiwwLDAsMC43ODU5MjYsLTY5MzYuMzE0MjQ5LC0xMjg4LjcwOTEyMykiPjxwYXRoIGQ9Ik04MDkzLjI1Myw4NTAuMzI4QzgwNDMuNTgxLDgxMS4yODUgODAxNi41ODIsNzkxLjM0OSA3OTkxLjczNSw3NzcuMjM0QzgxMTAuNTI0LDc1OC45NTggODE4MC43MTcsNjg3LjUyNSA4MTgwLjcxNyw2MDEuMTU3QzgxODAuNzE3LDQ0Mi41MTUgNzk3My4zODcsNDAyLjY1MyA3ODA5LjI2Miw0MDIuNjUzTDczNDQuOTA5LDQwMi42NTNMNzE4MC44NDUsNTQ3LjE2TDc4MjcuNjA5LDU0Ny4xNkM3OTA0LjI3LDU0Ny4xNiA3OTUwLjcyNCw1NjguNzY3IDc5NTAuNzI0LDYxMS45NDFDNzk1MC43MjQsNjUwLjE2NCA3ODk2LjcyNiw2NzQuMjUyIDc4MjcuNjA5LDY3NC4yNTJMNzE5OS4xMzEsNjc0LjI1Mkw3MTk5LjEzMSw5NTguMzA0TDc0MjIuNjU2LDk1OC4zMDRMNzQyMi42NTYsODExLjI4Nkw3NzY2LjA1Nyw4MTEuMjg2TDc5MjYuOTY0LDk1OC4zMDRMODIyNi4wNjQsOTU4LjMwNEw4MDkzLjI1Myw4NTAuMzI5TDgwOTMuMjUzLDg1MC4zMjhaTTcwMDQuMTc0LDQwMi42NTJMNjg0MC4wMjgsNTU2LjI5MkM2Nzg4LjIwMyw2MDQuNDY4IDY3NjMuMzY3LDYyOC41NjYgNjc0OS4zMjQsNjQ0LjMzMUM2NzM0LjIwNSw2MjcuNzI2IDY2NzMuNzM5LDU3Ny4wNTkgNjY1MS4wNTYsNTU3LjEzM0w2NDc4LjI2OSw0MDIuNjUzTDYxOTEuMDM5LDQwMi42NTNMNjYzMS42MjEsNzczLjkxNEw2NjMxLjYyMSw5NTguMzA0TDY4NTYuMjIyLDk1OC4zMDRMNjg1Ni4yMjIsNzc0Ljc0NEw3Mjg0LjkzNSw0MDIuNjUzTDcwMDQuMTczLDQwMi42NTNMNzAwNC4xNzQsNDAyLjY1MlpNNjI5OS4zOTQsNjExLjEwOUM2Mjk5LjM5NCw0ODcuMzQ5IDYxNjguNzM1LDQwMi42NTIgNTk0NS4xOSw0MDIuNjUyTDU0OTEuNjUxLDQwMi42NTJMNTM0My43MTEsNTQ3LjE1OUw1OTY1LjcxMSw1NDcuMTU5QzYwMzQuODA3LDU0Ny4xNTkgNjA3NC43NzMsNTcxLjI1NyA2MDc0Ljc3Myw2MTAuMjlDNjA3NC43NzMsNjQ4LjQ5MiA2MDM0LjgwOCw2NzQuMjUxIDU5NjUuNzExLDY3NC4yNTFMNTM0My43MTEsNjc0LjI1MUw1MzQzLjcxMSw3NzkuOTcxTDU0MDguOTQzLDk1OC4zMDNMNTU2Ni4xOCw5NTguMzAzTDU1NjYuMTgsODE2LjI2N0w1OTQ0LjExMyw4MTYuMjY3QzYxNjguNzM1LDgxNi4yNjcgNjI5OS4zOTQsNzM0LjA1MSA2Mjk5LjM5NCw2MTEuMTFMNjI5OS4zOTQsNjExLjEwOVpNNDQ2MC45OTgsNDUyLjQ3OEM0NDM1LjA3NSw0MTUuOTI2IDQzOTYuMTk3LDM5My40OTkgNDMzOC45NiwzOTMuNDk5QzQyODIuNzk5LDM5My40OTkgNDIzMi4wNTEsNDE4LjQxNyA0MjEyLjYyNyw0NjkuOTI0TDQwMjUuODA4LDk1OC4zMDNMNDI0NS4wMTgsOTU4LjMwM0w0MzEzLjAzOCw3NjQuNzhDNDMzNC42NDUsNzAyLjQ4IDQzNTAuODQxLDY1NS45ODUgNDM2MS42NDQsNjExLjk0QzQzODQuMzI4LDY0OS4zMzMgNDQxMC4yMyw2ODguMzY1IDQ0NjMuMTUxLDc2NC43OEw0NTYwLjM0Myw5MDUuMTQ2QzQ1OTguMTI1LDk1OS45NjQgNDYzNC44MzEsOTY3LjQzNiA0Njg4LjgyOSw5NjcuNDM2QzQ3NDIuODM3LDk2Ny40MzYgNDc3OS41MzMsOTU5Ljk2NCA0ODE3LjMzNSw5MDUuMTQ2TDQ5MTQuNTI3LDc2NS42MTFDNDk2NC4xOTksNjkzLjM0NyA0OTkxLjE4OCw2NTAuOTg0IDUwMTQuOTU4LDYxMS45NDFDNTAyNi44MTcsNjU2LjgwNiA1MDQxLjkzNiw3MDEuNjYxIDUwNjQuNjIsNzY0Ljc4MUw1MTMyLjY2MSw5NTguMzA0TDUzNTUuMSw5NTguMzA0TDUxNzIuNjA2LDQ2OS45MjVDNTE1My4xNzIsNDE4LjQxOCA1MTAzLjQ5OSwzOTMuNSA1MDQ3LjM0OSwzOTMuNUM0OTg5LjAzNiwzOTMuNSA0OTUwLjE1Nyw0MTYuNzY4IDQ5MjQuMjM0LDQ1Mi40NzlMNDgwOC42ODQsNjEwLjI5QzQ3NDQuOTc5LDY5NS44MzggNDcxNi45MTQsNzM2LjU0MSA0NjkzLjE2NSw3NzUuNTg0QzQ2NjguMzE5LDczNi41NDEgNDY0MC4yNDMsNjk1LjAwOCA0NTc2LjUxOCw2MDkuNDQ5TDQ0NjAuOTk5LDQ1Mi40NzhMNDQ2MC45OTgsNDUyLjQ3OFpNMzkzMi42MzMsNDAyLjY1MkwzNzY4LjQ3Nyw1NTYuMjkyQzM3MTYuNjYyLDYwNC40NjggMzY5MS44MTYsNjI4LjU2NiAzNjc3Ljc3Myw2NDQuMzMxQzM2NjIuNjY0LDYyNy43MjYgMzYwMi4xODgsNTc3LjA1OSAzNTc5LjUwNSw1NTcuMTMzTDM0MDYuNzM5LDQwMi42NTNMMzExOS40OTksNDAyLjY1M0wzNTYwLjA3MSw3NzMuOTE0TDM1NjAuMDcxLDk1OC4zMDRMMzc4NC42OTMsOTU4LjMwNEwzNzg0LjY5Myw3NzQuNzQ0TDQyMTMuMzk1LDQwMi42NTNMMzkzMi42MzMsNDAyLjY1M0wzOTMyLjYzMyw0MDIuNjUyWk0zMjEwLjg2OCw1NDIuODAyTDMwNTEuMTMsNDA0Ljg0NUwyOTg4LjQyLDQwMi42NTFMMjk4OC40Miw2MTkuMDkzTDI1NTguNjMxLDYxOS4wOTNMMjU1OC42MzEsNDAyLjY1MUwyMzM0LjAzLDQwMi42NTFMMjMzNC4wMyw5NTguMzAyTDI1NTguNjMxLDk1OC4zMDJMMjU1OC42MzEsNzYzLjYyMUwyOTg4LjQyLDc2My42MjFMMjk4OC40Miw5NTguMzAyTDMyMTAuODY5LDk1OC4zMDJMMzIxMC44NjksNTQyLjgwMkwzMjEwLjg2OCw1NDIuODAyWiIgc3R5bGU9ImZpbGw6IzNEMjQwODtmaWxsLXJ1bGU6bm9uemVybzsiLz48L2c+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMjQuMjYwMjk0LDAsMCwxNi45NzA5MDgsLTc3ODcyLjAyODI4NywtMzMyMzYuMjYzMjM4KSI+PHBhdGggZD0iTTMwOTguMzY5LDE5MzMuNzExTDMwOTQuMzczLDE5MzguMTQ0TDMwODAuNzEsMTkzOC4xNzdDMzA3NS40NzcsMTkzOC42MTEgMzA3NC41NzgsMTk0NC45MjUgMzA4MC42ODcsMTk0Ni4wMjJMMzA5Mi4wMTcsMTk0Ni4xMDhMMzA5Mi4wMTcsMTk0My41MTVMMzA4MS42NjEsMTk0My42NDRMMzA4MS42NjEsMTk0MC4wNTVMMzA5OC45LDE5NDAuMDU1TDMwOTguOSwxOTUwLjQ1OEwzMDgwLjc4MSwxOTUwLjQ1OEMzMDc3Ljc5LDE5NTAuNDU4IDMwNzQuOTIyLDE5NDkuNTc2IDMwNzIuODA3LDE5NDguMDA1QzMwNzAuNjkzLDE5NDYuNDM1IDMwNjkuNTA1LDE5NDQuMzA1IDMwNjkuNTA1LDE5NDIuMDg1TDMwNjkuNTA1LDE5NDIuMDg0QzMwNjkuNTA1LDE5MzkuODY0IDMwNzAuNjkzLDE5MzcuNzM0IDMwNzIuODA3LDE5MzYuMTY0QzMwNzQuOTIyLDE5MzQuNTkzIDMwNzcuNzksMTkzMy43MTEgMzA4MC43ODEsMTkzMy43MTFMMzA5OC4zNjksMTkzMy43MTFaIiBzdHlsZT0iZmlsbDojQ0I3QTI4OyIvPjwvZz48ZyB0cmFuc2Zvcm09Im1hdHJpeCg3LjgwNzg5MSwwLDAsNC4wNTU4MTksLTMzMjQuODgyNTY3LC0xMzY1LjY3NDEwNSkiPjxwYXRoIGQ9Ik0xOTQuMTEyLDI4NC43MDJMMTYxLjM1NywyODQuNzAyTDE2MS4zNTcsMzAzLjM4N0wxNDAuMDgsMzAzLjM4N0wxNDAuMDgsMjY2LjU2NEwyMDUuMDM2LDI2Ni41NjRDMjA2LjkzMywyNjYuNTY0IDIwOC43NTMsMjY1LjgxIDIxMC4wOTUsMjY0LjQ2OEMyMTEuNDM2LDI2My4xMjcgMjEyLjE5LDI2MS4zMDcgMjEyLjE5LDI1OS40MUwyMTIuMTksMjU5LjQwN0MyMTIuMTksMjU3LjUxIDIxMS40MzYsMjU1LjY5IDIxMC4wOTUsMjU0LjM0OUMyMDguNzUzLDI1My4wMDcgMjA2LjkzMywyNTIuMjUzIDIwNS4wMzYsMjUyLjI1M0wxMzkuMDc2LDI1Mi4yNTNMMTUzLjgyLDIzMy4zMTJMMjA4LjIzOSwyMzMuMzEyQzIyMi40MjksMjMzLjMxMiAyMzMuOTMzLDI0NC44MTYgMjMzLjkzMywyNTkuMDA2TDIzMy45MzMsMjU5LjAwOEMyMzMuOTMzLDI2OS41MjYgMjI4LjI2OCwyNzcuNjI2IDIxNi42NSwyODAuNjI5TDIzOS4xODcsMzAzLjM4N0wyMTAuNTksMzAzLjM4N0wxOTQuMTEyLDI4NC43MDJaIiBzdHlsZT0iZmlsbDojQ0I3QTI4OyIvPjwvZz48ZyB0cmFuc2Zvcm09Im1hdHJpeCg3LjgyNjI0LDAsMCw0LjA2NTM1LC0zMDYxLjA3NjMwNCwtMTM2OC41OTUwOTQpIj48cGF0aCBkPSJNMzE1LjI4MSwyMzMuMzEyQzMyMS42NjUsMjMzLjMxMiAzMjcuNTk2LDIzNi42MDcgMzMwLjk2OSwyNDIuMDI3QzM0Mi42NTQsMjYwLjgwMiAzNjkuMTU3LDMwMy4zODcgMzY5LjE1NywzMDMuMzg3TDM0My40MTIsMzAzLjM4N0wzMTUuMzE4LDI1Ny43MjlMMjg4LjUyMiwzMDMuMzg3TDI2Mi43NzcsMzAzLjM4N0MyNjIuNzc3LDMwMy4zODcgMjg3Ljk0OSwyNjEuMjM2IDI5OS4yNDgsMjQyLjMxNkMzMDIuNTgzLDIzNi43MzIgMzA4LjYwOSwyMzMuMzEyIDMxNS4xMTMsMjMzLjMxMkMzMTUuMTY5LDIzMy4zMTIgMzE1LjIyNSwyMzMuMzEyIDMxNS4yODEsMjMzLjMxMloiIHN0eWxlPSJmaWxsOiNDQjdBMjg7Ii8+PC9nPjxnIHRyYW5zZm9ybT0ibWF0cml4KDcuODI2MjQsMCwwLDQuMDY1MzUsLTI4NzAuNzMzMjcsLTEzNjguNTk1MDk0KSI+PHBhdGggZD0iTTQyMi44NDUsMjY0LjUzTDQyMi43OSwzMDMuMzg3TDQwMi42OTUsMzAzLjM4N0w0MDIuNjk1LDIzMy4zMTJMNDE2LjYxOSwyMzMuMzEyTDQxNi42NjIsMjMzLjUwM0w0NjUuMjIxLDI3My45NTNMNDY1LjIyMiwyNzMuOTZMNDY1LjI4MSwyMzMuMzEyTDQ4NS4zNzUsMjMzLjMxMkw0ODUuMzc1LDMwMy4zODdMNDY5LjA4NCwzMDMuMzg3TDQyMi44NDUsMjY0LjUzWiIgc3R5bGU9ImZpbGw6I0NCN0EyODsiLz48L2c+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMzIuNjcwODM0LDAsMCwxNi45NzA5MDgsLTEyNDQ3LjE2NTgzNCwtMjAwMS4wODEwODUpIj48cGF0aCBkPSJNNDI2LjQ5NywxMDkuOTQ1QzQyNC43MDQsMTA5Ljk0NSA0MjMuMjQ5LDEwOC40OTEgNDIzLjI0OSwxMDYuNjk3TDQyMy4yNDksOTMuMTk4TDQyNy45OTEsOTMuMTk4TDQyNy45OTEsMTA0LjE3OEM0MjcuOTkxLDEwNC41OTIgNDI4LjE1NSwxMDQuOTg5IDQyOC40NDgsMTA1LjI4MkM0MjguNzQxLDEwNS41NzUgNDI5LjEzOCwxMDUuNzM5IDQyOS41NTIsMTA1LjczOUw0MzYuNjg2LDEwNS43MzlDNDM3LjEsMTA1LjczOSA0MzcuNDk3LDEwNS41NzUgNDM3Ljc5LDEwNS4yODJDNDM4LjA4MiwxMDQuOTg5IDQzOC4yNDcsMTA0LjU5MiA0MzguMjQ3LDEwNC4xNzhMNDM4LjI0Nyw5My4xOThMNDQzLjA1NSw5My4xOThMNDQzLjA1NSwxMDYuNjk3QzQ0My4wNTUsMTA4LjQ5MSA0NDEuNjAxLDEwOS45NDUgNDM5LjgwOCwxMDkuOTQ1TDQyNi40OTcsMTA5Ljk0NVoiIHN0eWxlPSJmaWxsOiNDQjdBMjg7Ii8+PC9nPjxnIHRyYW5zZm9ybT0ibWF0cml4KDMyLjY3MDgzNCwwLDAsMTYuOTcwOTA4LC0xMTY4NS4xMTg0NCwtMjAwMS4wODEwODUpIj48cGF0aCBkPSJNNDMzLjU5LDEwOS45NDVMNDMzLjU5LDkzLjE5OEw0MzguMzA1LDkzLjE5OEw0MzguMzA1LDEwNS44MzNMNDUyLjM2NSwxMDUuODMzTDQ1Ni45NDYsMTA5Ljk0NUw0MzMuNTksMTA5Ljk0NVoiIHN0eWxlPSJmaWxsOiNDQjdBMjg7Ii8+PC9nPjxnIHRyYW5zZm9ybT0ibWF0cml4KDE4LjEyODk5NiwwLDAsOS40MTcxMzEsLTQ4OTUuMzkyMjg0LC0xMjk3LjM4NDE5NSkiPjxwYXRoIGQ9Ik00NzMuOTMxLDEyMy40MDlMNDczLjkzMSw5My4xNThMNTA4LjI1LDkzLjE1OEw1MDIuMjU1LDEwMC44NTNMNDgxLjYyNiwxMDAuODUzTDQ4MS42MjYsMTA0LjQzNkw1MDguMjUsMTA0LjQzNkw1MDIuMjU1LDExMi4xMzFMNDgxLjYyNiwxMTIuMTMxTDQ4MS42MjYsMTE1LjcxNEw1MDguMjUsMTE1LjcxNEw1MDIuMjU1LDEyMy40MDlMNDczLjkzMSwxMjMuNDA5WiIgc3R5bGU9ImZpbGw6I0NCN0EyODsiLz48L2c+PGcgdHJhbnNmb3JtPSJtYXRyaXgoNy43NjUyODcsMCwwLDQuMTg3OTUyLDY5OS4yNzg3MTgsLTEzOTcuMTk5NDMzKSI+PHBhdGggZD0iTTU2OC4wODYsMjYwLjc5Mkw1OTguNTQ3LDI2MC40NTFDNjA0LjU2MywyNjAuMzgzIDYxMC4zNTYsMjYyLjYzOCA2MTQuNjM0LDI2Ni43MTFDNjE4LjkxMywyNzAuNzg0IDYyMS4zMjEsMjc2LjMzNyA2MjEuMzIxLDI4Mi4xMzJMNjIxLjMyMSwyODIuMTQ5QzYyMS4zMjEsMjkyLjc2OSA2MTIuNDIsMzAxLjM5OCA2MDEuMzkzLDMwMS40NjhMNTI0LjQxMywzMDEuOTUyTDUzOC4zODYsMjg0LjIxOEw1OTQuNjksMjg0LjIxOEM1OTYuMDMxLDI4NC4yMTggNTk3LjMxOCwyODMuNzA0IDU5OC4yNjYsMjgyLjc5MUM1OTkuMjE1LDI4MS44NzcgNTk5Ljc0OCwyODAuNjM4IDU5OS43NDgsMjc5LjM0Nkw1OTkuNzQ4LDI3OS4zNDNDNTk5Ljc0OCwyNzguMDUxIDU5OS4yMTUsMjc2LjgxMiA1OTguMjY2LDI3NS44OTlDNTk3LjMxOCwyNzQuOTg1IDU5Ni4wMzEsMjc0LjQ3MiA1OTQuNjksMjc0LjQ3Mkw1NjYuOTIxLDI3NC40NzJMNTY2LjkyMSwyNzQuNDU5TDU0OC4yNjYsMjc0LjQ1OUM1NDIuNjAxLDI3NC40NTkgNTM3LjE2OSwyNzIuMjkxIDUzMy4xNjMsMjY4LjQzM0M1MjkuMTU4LDI2NC41NzUgNTI2LjkwNywyNTkuMzQzIDUyNi45MDcsMjUzLjg4N0w1MjYuOTA3LDI1My44ODRDNTI2LjkwNywyNDguNDI4IDUyOS4xNTgsMjQzLjE5NSA1MzMuMTYzLDIzOS4zMzdDNTM3LjE2OSwyMzUuNDc5IDU0Mi42MDEsMjMzLjMxMiA1NDguMjY2LDIzMy4zMTJMNjE5LjU4NSwyMzMuMzEyTDYwNS42MTIsMjUxLjA0Nkw1NTMuMTIsMjUxLjA0NkM1NTAuMzI2LDI1MS4wNDYgNTQ4LjA2MiwyNTMuMjI3IDU0OC4wNjIsMjU1LjkxOEw1NDguMDYyLDI1NS45MkM1NDguMDYyLDI1Ny4yMTIgNTQ4LjU5NSwyNTguNDUxIDU0OS41NDMsMjU5LjM2NUM1NTAuNDkyLDI2MC4yNzkgNTUxLjc3OCwyNjAuNzkyIDU1My4xMiwyNjAuNzkyTDU2OC4wODYsMjYwLjc5MloiIHN0eWxlPSJmaWxsOiNDQjdBMjg7Ii8+PC9nPjwvZz48L2c+PC9zdmc+" alt="Hympyr Granulés" width="204" height="34">
-    <div><h1>Cockpit granulés</h1><p style="margin-top:var(--s2)">Accès réservé à l'équipe. Utilisez le mot de passe transmis en interne.</p></div>
-    <div class="champ"><label for="porte-pw">Mot de passe</label><input class="saisie" id="porte-pw" type="password" autocomplete="current-password" aria-describedby="porte-err"></div>
-    <p class="porte-erreur" id="porte-err" role="alert"></p>
-    <button class="btn btn--main" id="porte-ok" type="submit">Se connecter</button>
-  </form>
+    <form id="f-conn" novalidate>
+      <div><h1>Cockpit granulés</h1><p style="margin-top:var(--s2)">Accès réservé aux membres de l'équipe. Connectez-vous avec votre compte.</p></div>
+      <p class="porte-info" id="f-conn-info" role="status"></p>
+      <div class="champ"><label for="c-email">Adresse e-mail</label><input class="saisie" id="c-email" type="email" autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false"></div>
+      <div class="champ"><label for="c-mdp">Mot de passe</label><input class="saisie" id="c-mdp" type="password" autocomplete="current-password"></div>
+      <p class="porte-erreur" role="alert"></p>
+      <button class="btn btn--main" id="c-ok" type="submit">Se connecter</button>
+      <button class="lien" id="c-oubli" type="button">Mot de passe oublié ?</button>
+    </form>
+    <form id="f-oubli" novalidate hidden>
+      <div><h1>Mot de passe oublié</h1><p style="margin-top:var(--s2)">Saisissez l'adresse e-mail de votre compte : vous recevrez un lien pour choisir un nouveau mot de passe.</p></div>
+      <div class="champ"><label for="o-email">Adresse e-mail</label><input class="saisie" id="o-email" type="email" autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false"></div>
+      <p class="porte-erreur" role="alert"></p>
+      <button class="btn btn--main" id="o-ok" type="submit">Envoyer le lien</button>
+      <button class="lien" id="o-retour" type="button">Retour à la connexion</button>
+    </form>
+    <form id="f-nouveau" novalidate hidden>
+      <div><h1>Nouveau mot de passe</h1><p style="margin-top:var(--s2)">Choisissez un mot de passe d'au moins 10 caractères.</p></div>
+      <div class="champ"><label for="n-mdp">Nouveau mot de passe</label><input class="saisie" id="n-mdp" type="password" autocomplete="new-password"></div>
+      <div class="champ"><label for="n-mdp2">Confirmer</label><input class="saisie" id="n-mdp2" type="password" autocomplete="new-password"></div>
+      <p class="porte-erreur" role="alert"></p>
+      <button class="btn btn--main" id="n-ok" type="submit">Enregistrer</button>
+    </form>
+    <div id="f-charge" hidden>
+      <div id="ch-etat" class="porte-charge"><span class="chargement" aria-hidden="true"></span><p>Chargement des données de l'équipe…</p></div>
+      <p class="porte-erreur" id="ch-err" role="alert"></p>
+      <button class="btn btn--main" id="ch-retour" type="button" hidden>Réessayer</button>
+    </div>
+  </div>
 </div>
 
 <header class="hd verre" id="hd">
@@ -1276,10 +1309,11 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
       if (S.mode !== 'cloud') { S.statut = 'ok'; S.derniere = Date.now(); S.persisterLocal(); S.notifier(); return Promise.resolve(true); }
       S.statut = 'enregistrement'; S.notifier();
       return nuage('save', { payload: H.encoderEtat(S.etat), expected_revision: S.revision }).then(function (r) {
-        S.revision = r.revision; S.statut = 'ok'; S.vide = false; S.derniere = Date.now(); S.message = ''; S.persisterLocal(); S.notifier(); return true;
+        S.revision = r.revision; S.statut = 'ok'; S.vide = false; S.derniere = Date.now(); S.message = ''; S.auteur = (APP.session.utilisateur() || {}).email || ''; S.persisterLocal(); S.notifier(); return true;
       }, function (e) {
         S.message = e.message;
         if (e.code === 'conflit') { S.statut = 'conflit'; S.notifier(); APP.fenetreConflit(); }
+        else if (e.code === 'session') { S.statut = 'erreur'; S.notifier(); APP.porte.ouvrir().then(function () { APP.porte.fermer(); return S.enregistrer(); }); }
         else { S.statut = 'erreur'; S.notifier(); if (!opts.silencieux) APP.toast('Sauvegarde non confirmée : ' + e.message + ' Vos données restent sur cet appareil.', 'err'); }
         return false;
       });
@@ -1290,23 +1324,78 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
       S.statut = 'enregistrement'; S.notifier();
       return nuage('load').then(function (r) {
         if (r.payload) { S.etat = H.decoderEtat(r.payload); S.vide = false; } else { S.vide = true; }
-        S.revision = r.revision; S.statut = 'ok'; S.message = ''; S.derniere = Date.now(); S.persisterLocal(); S.notifier(); return true;
+        S.revision = r.revision; S.statut = 'ok'; S.message = ''; S.derniere = Date.now(); S.auteur = r.updated_by_email || ''; S.majBase = r.updated_at || null; S.persisterLocal(); S.notifier(); return true;
       }, function (e) { S.statut = 'erreur'; S.message = e.message; S.notifier(); throw e; });
     }
   };
 
-  /** Appel à la fonction serveur (qui détient la clé Supabase : elle n'est jamais dans la page). */
-  function nuage(action, corps) {
-    var pw = sessionStorage.getItem('hym.pw') || '';
-    var body = Object.assign({ action: action, password: pw }, corps || {});
-    return APP.reseau.json(CFG.SYNC_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), timeout: 20000 }).catch(function (e) {
-      var err = new Error('Base injoignable.');
-      if (e.status === 409) { err = new Error('Une autre session a enregistré des modifications.'); err.code = 'conflit'; }
-      else if (e.status === 401 || e.status === 403) { err = new Error('Mot de passe refusé par le serveur.'); err.code = 'auth'; }
-      else if (e.status) err = new Error('Échec de la base (HTTP ' + e.status + ').');
-      throw err;
+  /* ------------------------------------------------------------------ fonction serveur (qui détient les clés Supabase : la page n'en contient aucune) */
+  function erreurDe(e, corps) {
+    var err = new Error(corps && corps.message ? corps.message : 'Service injoignable.');
+    var st = e && e.status;
+    if (st === 409) err.code = 'conflit';
+    else if (st === 401) err.code = 'auth';
+    else if (st === 403) err.code = 'membre';
+    else if (st === 400) err.code = 'requete';
+    else if (st) { err.code = 'base'; if (!corps || !corps.message) err.message = 'Échec du service (HTTP ' + st + ').'; }
+    else err.code = 'reseau';
+    return err;
+  }
+  function appeler(action, corps, jeton) {
+    var headers = { 'Content-Type': 'application/json' };
+    if (jeton) headers.Authorization = 'Bearer ' + jeton;
+    return APP.reseau.json(CFG.SYNC_URL, { method: 'POST', headers: headers, body: JSON.stringify(Object.assign({ action: action }, corps || {})), timeout: 20000 }).catch(function (e) {
+      if (e && e.corps && e.corps.json) return e.corps.json().catch(function () { return null; }).then(function (b) { throw erreurDe(e, b); });
+      throw erreurDe(e, null);
     });
   }
+
+  /* ------------------------------------------------------------------ session de membre */
+  var CLE_SESSION = 'hym.session', enRafraichissement = null;
+  function ecrireSession(r) {
+    var s = { access_token: r.access_token, refresh_token: r.refresh_token, expire: Date.now() + (r.expires_in || 3600) * 1000, email: r.email, nom: r.nom || '' };
+    try { localStorage.setItem(CLE_SESSION, JSON.stringify(s)); } catch (e) {}
+    return s;
+  }
+  APP.session = {
+    lire: function () { try { return JSON.parse(localStorage.getItem(CLE_SESSION) || 'null'); } catch (e) { return null; } },
+    effacer: function () { try { localStorage.removeItem(CLE_SESSION); } catch (e) {} },
+    active: function () { return !!APP.session.lire(); },
+    utilisateur: function () { var s = APP.session.lire(); return s ? { email: s.email, nom: s.nom } : null; },
+    connexion: function (email, mdp) { return appeler('login', { email: email, password: mdp }).then(ecrireSession); },
+    recuperer: function (email) { return appeler('recover', { email: email }); },
+    /** Jeton valide : renouvelé automatiquement quand il approche de son expiration. */
+    jeton: function () {
+      var s = APP.session.lire();
+      if (!s) { var e = new Error('Connexion requise.'); e.code = 'session'; return Promise.reject(e); }
+      if (Date.now() < s.expire - 90000) return Promise.resolve(s.access_token);
+      return APP.session.rafraichir().then(function (n) { return n.access_token; });
+    },
+    rafraichir: function () {
+      var s = APP.session.lire();
+      if (!s) { var e = new Error('Connexion requise.'); e.code = 'session'; return Promise.reject(e); }
+      if (enRafraichissement) return enRafraichissement;
+      enRafraichissement = appeler('refresh', { refresh_token: s.refresh_token }).then(ecrireSession, function (err) {
+        if (err.code === 'auth' || err.code === 'membre') { APP.session.effacer(); err.code = 'session'; err.message = 'Session expirée : reconnectez-vous.'; }
+        throw err;
+      }).finally(function () { enRafraichissement = null; });
+      return enRafraichissement;
+    },
+    changerMotDePasse: function (mdp) { return nuage('password', { password: mdp }); }
+  };
+
+  /** Appel authentifié : une session refusée est renouvelée une fois avant d'abandonner. */
+  function nuage(action, corps) {
+    var essai = function (reprise) {
+      return APP.session.jeton().then(function (j) { return appeler(action, corps, j); }).catch(function (e) {
+        if (e.code === 'auth' && !reprise) return APP.session.rafraichir().then(function () { return essai(true); });
+        if (e.code === 'auth') { APP.session.effacer(); e.code = 'session'; e.message = 'Session expirée : reconnectez-vous.'; }
+        throw e;
+      });
+    };
+    return essai(false);
+  }
+  APP.appelerFonction = appeler;
 
   APP.fenetreConflit = function () {
     var f = APP.fenetre('<div class="modale verre"><h2>Modifications concurrentes</h2><div class="aide">Un collègue a enregistré des changements pendant que vous travailliez. Pour ne rien écraser, exportez votre travail (Excel), rechargez la base, puis réappliquez vos modifications.</div>' +
@@ -1316,18 +1405,8 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
     $('[data-rech]', f.el).addEventListener('click', function () { S.recharger().then(function () { f.fermer(); APP.toast('Base rechargée.'); APP.tout.rendre(); }, function (e) { APP.toast(e.message, 'err'); }); });
   };
 
-  /* ------------------------------------------------------------------ accès par mot de passe d'équipe (empreinte PBKDF2-SHA256, comme la version Streamlit) */
-  var ACCES = { sel: '272ff44ec0272c516b1a516bbc76abe0', empreinte: '37a0061896b698156997ea56804eb3cd3d8f64756816db28419bcdb51e28f70d', iterations: 600000 };
-  function hex2bytes(h) { var a = new Uint8Array(h.length / 2); for (var i = 0; i < a.length; i++) a[i] = parseInt(h.substr(i * 2, 2), 16); return a; }
-  function bytes2hex(b) { return [].map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
-  APP.motDePasseValide = function (saisi) {
-    if (!(window.crypto && crypto.subtle)) return Promise.reject(new Error('Ce navigateur ne permet pas la vérification sécurisée (page non sécurisée).'));
-    return crypto.subtle.importKey('raw', new TextEncoder().encode(saisi), 'PBKDF2', false, ['deriveBits']).then(function (k) {
-      return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: hex2bytes(ACCES.sel), iterations: ACCES.iterations, hash: 'SHA-256' }, k, 256);
-    }).then(function (bits) { return bytes2hex(bits) === ACCES.empreinte; });
-  };
-  APP.accesOk = function () { return sessionStorage.getItem('hym.acces') === ACCES.empreinte; };
-  APP.verrouiller = function () { sessionStorage.removeItem('hym.acces'); sessionStorage.removeItem('hym.pw'); location.reload(); };
+  /* ------------------------------------------------------------------ déconnexion */
+  APP.verrouiller = function () { APP.session.effacer(); location.reload(); };
 
   /* ------------------------------------------------------------------ onglets : pastille qui glisse, transition sans saccade */
   var ONGLETS = ['simulateur', 'grille', 'donnees', 'analyse'];
@@ -2432,11 +2511,11 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
   };
 })();
 
-/* Cockpit granulés · démarrage : connexion, en-tête, paramètres, synchronisation, navigation. */
+/* Cockpit granulés · démarrage : connexion des membres, en-tête, paramètres, synchronisation, navigation. */
 (function () {
   'use strict';
   var APP = window.APP, H = APP.H, $ = APP.$, $$ = APP.$$, esc = APP.esc, icon = APP.icon, S = APP.store, CFG = window.HYM_CONFIG || {};
-  var VERSION = '1.0.0';
+  var VERSION = '1.1.0';
 
   /* ------------------------------------------------------------------ état de synchronisation (puce de l'en-tête) */
   function puce() {
@@ -2451,18 +2530,124 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
     else { txt = 'Synchronisé · v' + S.revision; }
     p.className = cls;
     p.innerHTML = '<i></i><span class="txt">' + esc(txt) + '</span>';
-    p.title = S.mode === 'local' ? 'Les données sont conservées sur cet appareil uniquement. Exportez-les régulièrement.' : 'Base commune de l\'équipe';
+    var u = APP.session.utilisateur();
+    p.title = S.mode === 'local' ? 'Les données sont conservées sur cet appareil uniquement. Exportez-les régulièrement.' : 'Base commune de l\'équipe' + (u ? ' · connecté : ' + u.email : '');
   }
   APP.tout.puce = puce;
   S.abonner(puce);
 
+  /* ------------------------------------------------------------------ connexion des membres */
+  APP.porte = (function () {
+    var attente = null, termine = null, jetonRecuperation = null;
+    var formulaires = ['f-conn', 'f-oubli', 'f-nouveau', 'f-charge'];
+    function montrer(nom, info) {
+      formulaires.forEach(function (id) { $('#' + id).hidden = id !== nom; });
+      $$('.porte-erreur').forEach(function (e) { e.textContent = ''; });
+      var i = $('#' + nom + '-info'); if (i) i.textContent = info || '';
+      var champ = $('#' + nom + ' input'); if (champ && nom !== 'f-charge') setTimeout(function () { champ.focus(); }, 60);
+    }
+    function occupe(btn, texte) { btn.disabled = true; btn.dataset.txt = btn.innerHTML; btn.innerHTML = '<span class="chargement" aria-hidden="true"></span>' + texte; }
+    function libere(btn) { btn.disabled = false; if (btn.dataset.txt) btn.innerHTML = btn.dataset.txt; }
+    var messageErreur = function (e) { return e.code === 'auth' ? 'Identifiants incorrects.' : e.code === 'membre' ? 'Ce compte n\'est pas autorisé à utiliser le cockpit.' : e.code === 'reseau' ? 'Service injoignable : vérifiez la connexion.' : e.message; };
+
+    function lier() {
+      $('#f-conn').onsubmit = function (ev) {
+        ev.preventDefault();
+        var email = $('#c-email').value.trim(), mdp = $('#c-mdp').value, err = $('#f-conn .porte-erreur'), btn = $('#c-ok');
+        $('#c-email').setAttribute('aria-invalid', String(!email)); $('#c-mdp').setAttribute('aria-invalid', String(!mdp));
+        if (!email || !mdp) { err.textContent = 'Saisissez votre adresse e-mail et votre mot de passe.'; return; }
+        err.textContent = ''; occupe(btn, 'Vérification…');
+        APP.session.connexion(email, mdp).then(function () { $('#c-mdp').value = ''; libere(btn); if (termine) termine(); },
+          function (e) { libere(btn); err.textContent = messageErreur(e); $('#c-mdp').setAttribute('aria-invalid', 'true'); $('#c-mdp').select(); });
+      };
+      $('#c-oubli').onclick = function () { $('#o-email').value = $('#c-email').value; montrer('f-oubli'); };
+      $('#o-retour').onclick = function () { montrer('f-conn'); };
+      $('#f-oubli').onsubmit = function (ev) {
+        ev.preventDefault();
+        var email = $('#o-email').value.trim(), btn = $('#o-ok'), err = $('#f-oubli .porte-erreur');
+        if (!/.+@.+/.test(email)) { err.textContent = 'Saisissez votre adresse e-mail.'; return; }
+        occupe(btn, 'Envoi…');
+        APP.session.recuperer(email).then(function () { libere(btn); montrer('f-conn', 'Si cette adresse correspond à un compte membre, un e-mail de réinitialisation vient d\'être envoyé.'); }, function (e) { libere(btn); err.textContent = messageErreur(e); });
+      };
+      $('#f-nouveau').onsubmit = function (ev) {
+        ev.preventDefault();
+        var a = $('#n-mdp').value, b = $('#n-mdp2').value, err = $('#f-nouveau .porte-erreur'), btn = $('#n-ok');
+        if (a.length < 10) { err.textContent = 'Le mot de passe doit contenir au moins 10 caractères.'; return; }
+        if (a !== b) { err.textContent = 'Les deux mots de passe ne sont pas identiques.'; return; }
+        occupe(btn, 'Enregistrement…');
+        APP.appelerFonction('password', { password: a }, jetonRecuperation).then(function () { libere(btn); jetonRecuperation = null; $('#n-mdp').value = $('#n-mdp2').value = ''; montrer('f-conn', 'Mot de passe modifié. Connectez-vous avec le nouveau.'); },
+          function (e) { libere(btn); err.textContent = e.code === 'auth' ? 'Le lien de réinitialisation a expiré : redemandez-en un.' : messageErreur(e); });
+      };
+    }
+    var liees = false;
+    return {
+      /** Affiche la connexion ; résout quand un membre est connecté. */
+      ouvrir: function (opts) {
+        opts = opts || {};
+        if (!liees) { lier(); liees = true; }
+        if (opts.jeton) jetonRecuperation = opts.jeton;
+        if (attente) return attente;
+        var porte = $('#porte'); porte.hidden = false; porte.classList.remove('sort');
+        montrer(jetonRecuperation ? 'f-nouveau' : 'f-conn');
+        attente = new Promise(function (res) { termine = res; }).then(function () { attente = null; termine = null; });
+        return attente;
+      },
+      /** Panneau « chargement des données » (avec nouvel essai si la base est injoignable). */
+      charge: function (fn) {
+        if (!liees) { lier(); liees = true; }
+        var porte = $('#porte'); porte.hidden = false; porte.classList.remove('sort');
+        var essai = function () {
+          montrer('f-charge'); $('#ch-etat').hidden = false; $('#ch-err').textContent = ''; $('#ch-retour').hidden = true;
+          return fn().then(function () { return true; }, function (e) {
+            if (e.code === 'session') return APP.porte.ouvrir().then(essai);
+            $('#ch-etat').hidden = true; $('#ch-err').textContent = 'Chargement impossible : ' + e.message; $('#ch-retour').hidden = false;
+            return new Promise(function (r) { $('#ch-retour').onclick = function () { r(essai()); }; });
+          });
+        };
+        return essai();
+      },
+      fermer: function () { var p = $('#porte'); p.classList.add('sort'); setTimeout(function () { p.hidden = true; }, 600); },
+      recuperation: function () {
+        var h = new URLSearchParams((location.hash || '').replace(/^#/, ''));
+        if (h.get('type') === 'recovery' && h.get('access_token')) { var j = h.get('access_token'); try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} return j; }
+        return null;
+      }
+    };
+  })();
+
+  function connexion() {
+    if (S.mode === 'local') { $('#porte').remove(); return Promise.resolve(); }
+    var rec = APP.porte.recuperation();
+    var identifie = rec ? APP.porte.ouvrir({ jeton: rec }) : (APP.session.active() ? APP.session.jeton().then(function () {}, function () { return APP.porte.ouvrir(); }) : APP.porte.ouvrir());
+    return identifie.then(function () { return APP.porte.charge(function () { return S.recharger(); }); }).then(function () { APP.porte.fermer(); });
+  }
+
   /* ------------------------------------------------------------------ paramètres */
+  function nouveauMotDePasse() {
+    var f = APP.fenetre('<form class="modale verre" novalidate><h2>Changer mon mot de passe</h2><p class="aide">Choisissez un mot de passe d\'au moins 10 caractères, que vous n\'utilisez nulle part ailleurs.</p>' +
+      '<div class="champ"><label for="m-mdp">Nouveau mot de passe</label><input class="saisie" id="m-mdp" type="password" autocomplete="new-password"></div>' +
+      '<div class="champ"><label for="m-mdp2">Confirmer</label><input class="saisie" id="m-mdp2" type="password" autocomplete="new-password"></div><div class="msgs" id="m-err"></div>' +
+      '<div class="actions"><button class="btn btn--main" type="submit">Enregistrer</button><button class="btn btn--ghost" type="button" data-non>Annuler</button></div></form>');
+    $('[data-non]', f.el).onclick = f.fermer;
+    $('form', f.el).onsubmit = function (e) {
+      e.preventDefault();
+      var a = $('#m-mdp', f.el).value, b = $('#m-mdp2', f.el).value, z = $('#m-err', f.el);
+      var msg = function (t) { z.innerHTML = '<div class="msg msg--err">' + icon('alert') + '<div>' + esc(t) + '</div></div>'; };
+      if (a.length < 10) return msg('Au moins 10 caractères.');
+      if (a !== b) return msg('Les deux mots de passe ne sont pas identiques.');
+      APP.session.changerMotDePasse(a).then(function () { f.fermer(); APP.toast('Mot de passe modifié.'); }, function (err) { msg(err.message); });
+    };
+  }
+
   function parametres() {
+    var u = APP.session.utilisateur();
+    var maj = S.majBase ? new Date(S.majBase).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
     var info = S.mode === 'cloud'
-      ? '<div class="msg ' + (S.statut === 'ok' ? 'msg--ok' : S.statut === 'enregistrement' ? '' : 'msg--err') + '">' + icon(S.statut === 'ok' ? 'check' : 'alert') + '<div><b>Base commune connectée</b> · version ' + S.revision + (S.derniere ? ' · dernière synchronisation ' + new Date(S.derniere).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : '') + (S.message ? '<br>' + esc(S.message) : '') + '</div></div>'
+      ? '<div class="msg ' + (S.statut === 'ok' ? 'msg--ok' : S.statut === 'enregistrement' ? '' : 'msg--err') + '">' + icon(S.statut === 'ok' ? 'check' : 'alert') + '<div><b>Base commune connectée</b> · version ' + S.revision + (S.auteur ? '<br>Dernière sauvegarde : ' + esc(S.auteur) + (maj ? ' le ' + esc(maj) : '') : '') + (S.message ? '<br>' + esc(S.message) : '') + '</div></div>'
       : '<div class="msg msg--warn">' + icon('alert') + '<div><b>Mode local</b> : la base commune n\'est pas configurée. Les données restent sur cet appareil (navigateur). Exportez régulièrement le classeur Excel ou une sauvegarde.</div></div>';
+    var compte = S.mode === 'cloud' && u ? '<section><h3 class="etiquette">Mon compte</h3><p style="margin-top:var(--s2)"><b>' + esc(u.nom || u.email) + '</b><br><span class="aide">' + esc(u.email) + '</span></p><div class="actions" style="margin-top:var(--s3)"><button class="btn btn--ghost btn--s" type="button" data-mdp>' + icon('lock') + 'Changer mon mot de passe</button><button class="btn btn--ghost btn--s" type="button" data-deco>Se déconnecter</button></div><p class="aide" style="margin-top:var(--s2)">Les comptes et les mots de passe sont administrés dans Supabase par l\'administrateur de l\'équipe.</p></section>' : '';
     var f = APP.fenetre('<div class="tiroir verre" role="dialog" aria-label="Paramètres">' +
-      '<div class="titre" style="margin:0"><div><h1 style="font-size:var(--h2)">Paramètres</h1></div><button class="icone-btn" type="button" data-fermer aria-label="Fermer">' + icon('croix') + '</button></div>' +
+      '<div class="titre" style="margin:0"><div><h1 style="font-size:var(--h2)">Paramètres</h1></div><button class="icone-btn" type="button" data-fermer aria-label="Fermer">' + icon('croix') + '</button></div>' + compte +
       '<section><h3 class="etiquette">Départ des livraisons</h3><div class="champ" style="margin-top:var(--s3)"><label for="p-depart">Adresse de départ</label><input class="saisie" id="p-depart" value="' + esc(APP.pref('depart') || H.CONFIG.ADRESSE_DEPART) + '"></div><div class="actions" style="margin-top:var(--s3)"><button class="btn btn--main btn--s" type="button" data-depart>Enregistrer l\'adresse</button><button class="btn btn--ghost btn--s" type="button" data-depart-defaut>Valeur d\'origine</button></div></section>' +
       '<section><h3 class="etiquette">Synchronisation</h3><div style="margin-top:var(--s3)">' + info + '</div><div class="actions" style="margin-top:var(--s3)">' +
         (S.mode === 'cloud' ? '<button class="btn btn--main btn--s" type="button" data-sauver>' + icon('cloud') + 'Enregistrer l\'état actuel</button><button class="btn btn--ghost btn--s" type="button" data-rech>' + icon('refresh') + 'Recharger depuis la base</button>' : '') + '</div></section>' +
@@ -2471,6 +2656,8 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
       '<p class="aide">Cockpit granulés ' + VERSION + ' · ' + esc(H.CONFIG.SOCIETE) + ' · ' + esc(H.CONFIG.TELEPHONE) + '</p></div>', { classe: 'dlg-tiroir' });
     var el = f.el;
     $('[data-fermer]', el).onclick = f.fermer;
+    var m = $('[data-mdp]', el); if (m) m.onclick = function () { f.fermer(); nouveauMotDePasse(); };
+    var d = $('[data-deco]', el); if (d) d.onclick = APP.verrouiller;
     $('[data-depart]', el).onclick = function () { var v = $('#p-depart', el).value.trim(); if (v.length < 8) { APP.toast('Saisissez une adresse complète.', 'err'); return; } APP.pref('depart', v); try { localStorage.removeItem('hym.depart'); } catch (e) {} APP.sim.recalculer(); APP.toast('Adresse de départ enregistrée.'); };
     $('[data-depart-defaut]', el).onclick = function () { APP.pref('depart', H.CONFIG.ADRESSE_DEPART); try { localStorage.removeItem('hym.depart'); } catch (e) {} $('#p-depart', el).value = H.CONFIG.ADRESSE_DEPART; APP.sim.recalculer(); APP.toast('Adresse d\'origine rétablie.'); };
     var sv = $('[data-sauver]', el); if (sv) sv.onclick = function () { S.enregistrer().then(function (ok) { if (ok) { APP.toast('État enregistré.'); f.fermer(); } }); };
@@ -2480,49 +2667,12 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
       var fi = e.target.files[0]; if (!fi) return;
       fi.text().then(function (t) { var etat = H.decoderEtat(JSON.parse(t)); etat.source_grille = fi.name + ' (sauvegarde)'; return APP.confirmer({ titre: 'Remplacer les données ?', texte: 'La grille et l\'historique actuels seront remplacés par ceux du fichier « ' + fi.name + ' ».', ok: 'Remplacer', danger: true }).then(function (ok) { if (!ok) return; return S.appliquer(etat).then(function () { APP.toast('Sauvegarde importée.'); APP.tout.rendre(); f.fermer(); }); }); }).catch(function (err) { APP.toast('Fichier non valide : ' + err.message, 'err'); });
     };
-    $('[data-reset]', el).onclick = function () { APP.confirmer({ titre: 'Revenir aux valeurs par défaut ?', texte: 'La grille est remplacée par les valeurs du code. L\'historique de prix est conservé.', ok: 'Réinitialiser', danger: true }).then(function (ok) { if (!ok) return; var d = H.etatParDefaut(); d.historique = S.etat.historique; S.appliquer(d).then(function () { APP.toast('Valeurs par défaut rétablies.'); APP.tout.rendre(); f.fermer(); }); }); };
-  }
-
-  /* ------------------------------------------------------------------ connexion */
-  function connexion() {
-    return new Promise(function (resolve) {
-      var porte = $('#porte');
-      if (APP.accesOk() && (S.mode === 'local' || sessionStorage.getItem('hym.pw'))) { porte.remove(); resolve(); return; }
-      porte.hidden = false;
-      var form = $('#porte-form'), champ = $('#porte-pw'), err = $('#porte-err'), btn = $('#porte-ok');
-      champ.focus();
-      form.onsubmit = function (e) {
-        e.preventDefault();
-        var pw = champ.value; if (!pw) { err.textContent = 'Saisissez le mot de passe.'; champ.setAttribute('aria-invalid', 'true'); return; }
-        btn.disabled = true; btn.innerHTML = '<span class="chargement" aria-hidden="true"></span>Vérification…'; err.textContent = ''; champ.setAttribute('aria-invalid', 'false');
-        APP.motDePasseValide(pw).then(function (ok) {
-          if (!ok) { btn.disabled = false; btn.innerHTML = 'Se connecter'; err.textContent = 'Mot de passe incorrect.'; champ.setAttribute('aria-invalid', 'true'); champ.select(); return; }
-          try { sessionStorage.setItem('hym.acces', '37a0061896b698156997ea56804eb3cd3d8f64756816db28419bcdb51e28f70d'); sessionStorage.setItem('hym.pw', pw); } catch (e2) {}
-          resolve();
-        }, function (e2) { btn.disabled = false; btn.innerHTML = 'Se connecter'; err.textContent = e2.message; });
-      };
-    }).then(function () {
-      if (S.mode !== 'cloud') return;
-      // Base commune : le simulateur ne démarre jamais sur des tarifs par défaut si la base configurée est inaccessible.
-      var btn = $('#porte-ok'), err = $('#porte-err');
-      if (btn) { btn.innerHTML = '<span class="chargement" aria-hidden="true"></span>Chargement des données…'; btn.disabled = true; }
-      var essai = function () {
-        return S.recharger().then(function () { return true; }, function (e) {
-          if (!$('#porte')) { APP.toast('Base injoignable : ' + e.message, 'err'); return true; }
-          if (err) err.textContent = 'Chargement impossible : ' + e.message + ' ';
-          if (btn) { btn.disabled = false; btn.innerHTML = 'Réessayer la connexion'; }
-          return new Promise(function (r) { btn.onclick = function () { btn.onclick = null; btn.disabled = true; btn.innerHTML = '<span class="chargement" aria-hidden="true"></span>Chargement des données…'; r(essai()); }; $('#porte-form').onsubmit = function (ev) { ev.preventDefault(); btn.click(); }; });
-        });
-      };
-      return essai();
-    }).then(function () { var p = $('#porte'); if (p) { p.classList.add('sort'); setTimeout(function () { p.remove(); }, 600); } });
+    $('[data-reset]', el).onclick = function () { APP.confirmer({ titre: 'Revenir aux valeurs par défaut ?', texte: 'La grille est remplacée par les valeurs du code. L\'historique de prix est conservé.', ok: 'Réinitialiser', danger: true }).then(function (ok) { if (!ok) return; var dd = H.etatParDefaut(); dd.historique = S.etat.historique; S.appliquer(dd).then(function () { APP.toast('Valeurs par défaut rétablies.'); APP.tout.rendre(); f.fermer(); }); }); };
   }
 
   /* ------------------------------------------------------------------ démarrage */
   function demarrer() {
-    var navigation = function (e) {
-      var t = e.target.closest('.tab'); if (t) { if (APP.vues.grille.estSale() && t.dataset.onglet !== 'grille') { /* le brouillon est conservé */ } APP.aller(t.dataset.onglet); }
-    };
+    var navigation = function (e) { var t = e.target.closest('.tab'); if (t) APP.aller(t.dataset.onglet); };
     $$('.tabs, .basse').forEach(function (c) {
       c.addEventListener('click', navigation);
       c.addEventListener('keydown', function (e) {
@@ -2533,7 +2683,7 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
       });
     });
     $('#btn-param').onclick = parametres; $('#puce').onclick = parametres;
-    $('#btn-lock').onclick = APP.verrouiller;
+    var lock = $('#btn-lock'); if (S.mode === 'local') lock.hidden = true; else lock.onclick = APP.verrouiller;
     Object.keys(APP.vues).forEach(function (k) { if (APP.vues[k].rendre) APP.vues[k].rendre(); });
     puce();
     var depart = (location.hash || '').replace('#', '');
