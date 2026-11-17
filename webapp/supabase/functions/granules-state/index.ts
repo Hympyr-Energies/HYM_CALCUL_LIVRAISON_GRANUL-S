@@ -15,8 +15,8 @@
 //   { action: "save", payload, expected_revision }   -> 200 { revision } | 409 { code: "conflit" }
 //   refus d'accès -> 401 (identifiants ou jeton) / 403 (compte non membre) ; requête invalide -> 400 ; base injoignable -> 502.
 
-const ORIGINE = Deno.env.get("GRANULES_ALLOWED_ORIGIN") ?? "*";        // ex. https://quentindebrie-code.github.io
-const SITE_URL = Deno.env.get("GRANULES_SITE_URL") ?? "";              // adresse de la webapp (lien des e-mails « mot de passe oublié »)
+const ORIGINE = Deno.env.get("GRANULES_ALLOWED_ORIGIN") ?? "https://quentindebrie-code.github.io";   // origine de la webapp (GitHub Pages)
+const SITE_URL = Deno.env.get("GRANULES_SITE_URL") ?? "https://quentindebrie-code.github.io/HYM_CALCUL_LIVRAISON_GRANUL-S/webapp/";   // adresse de la webapp (lien des e-mails « mot de passe oublié »)
 const TAILLE_MAX = 6 * 1024 * 1024;
 
 const ENV = {
