@@ -152,7 +152,7 @@
       });
     });
     $('#btn-param').onclick = parametres; $('#puce').onclick = parametres;
-    var lock = $('#btn-lock'); if (S.mode === 'local') lock.hidden = true; else lock.onclick = APP.verrouiller;
+    var lock = $('#btn-lock'); if (S.mode === 'local') lock.hidden = true; else lock.onclick = function () { location.assign(APP.portail.url()); };   // accueil du portail, session conservée
     Object.keys(APP.vues).forEach(function (k) { if (APP.vues[k].rendre) APP.vues[k].rendre(); });
     puce();
     var depart = (location.hash || '').replace('#', '');
