@@ -1,8 +1,9 @@
 // Fonction Edge « granules-state » : passerelle entre le cockpit granulés (navigateur) et Supabase.
 //
 // - Les membres sont des comptes Supabase Authentication (mot de passe administré dans Supabase) listés dans public.granules_membres.
-// - La page ne contient AUCUNE clé Supabase : la connexion et les données passent par cette fonction, qui détient les clés
-//   (SUPABASE_ANON_KEY et SUPABASE_SERVICE_ROLE_KEY, fournies automatiquement par l'environnement des fonctions Edge).
+// - La connexion se fait au portail Hympyr (session supabase-js commune) ; la page envoie le jeton de cette session. Les données
+//   passent par cette fonction, qui détient les clés (SUPABASE_ANON_KEY et SUPABASE_SERVICE_ROLE_KEY, fournies par l'environnement).
+//   Les actions login, refresh et recover restent disponibles mais ne sont plus utilisées par la page.
 // - Chaque requête de données porte le jeton du membre ; la fonction le valide auprès de Supabase Auth, vérifie l'appartenance
 //   à granules_membres (actif), puis lit/écrit la table avec la clé serveur. Écritures protégées par une révision (409 si périmée).
 //
@@ -15,8 +16,12 @@
 //   { action: "save", payload, expected_revision }   -> 200 { revision } | 409 { code: "conflit" }
 //   refus d'accès -> 401 (identifiants ou jeton) / 403 (compte non membre) ; requête invalide -> 400 ; base injoignable -> 502.
 
-const ORIGINE = Deno.env.get("GRANULES_ALLOWED_ORIGIN") ?? "https://quentindebrie-code.github.io";   // origine de la webapp (GitHub Pages)
-const SITE_URL = Deno.env.get("GRANULES_SITE_URL") ?? "https://quentindebrie-code.github.io/HYM_CALCUL_LIVRAISON_GRANUL-S/webapp/";   // adresse de la webapp (lien des e-mails « mot de passe oublié »)
+// Origines autorisées : celle des outils Hympyr (GitHub Pages de l'organisation Hympyr-Energies), plus celles de la variable
+// GRANULES_ALLOWED_ORIGIN (liste séparée par des virgules). L'en-tête CORS renvoie l'origine de la requête si elle est autorisée.
+const ORIGINE = "https://hympyr-energies.github.io";
+const ORIGINES = new Set([ORIGINE, ...(Deno.env.get("GRANULES_ALLOWED_ORIGIN") ?? "").split(",").map((o) => o.trim().replace(/\/$/, "")).filter(Boolean)]);
+const origineDe = (req: Request) => { const o = req.headers.get("origin") ?? ""; return ORIGINES.has(o) ? o : ORIGINE; };
+const SITE_URL = Deno.env.get("GRANULES_SITE_URL") ?? "https://hympyr-energies.github.io/portail/";   // adresse de la webapp (lien des e-mails « mot de passe oublié »)
 const TAILLE_MAX = 6 * 1024 * 1024;
 
 const ENV = {
@@ -76,7 +81,7 @@ function payloadValide(p: any): boolean {
   return p && typeof p === "object" && p.schema_version === 1 && p.grille && typeof p.grille === "object" && Array.isArray(p.historique);
 }
 
-Deno.serve(async (req) => {
+async function traiter(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: entetes() });
   if (req.method !== "POST") return reponse({ code: "methode", message: "POST uniquement." }, 405);
   if (!ENV.url.startsWith("https://") || !ENV.anon || !ENV.serveur) return reponse({ code: "config", message: "Configuration serveur incomplète." }, 500);
@@ -146,4 +151,10 @@ Deno.serve(async (req) => {
   } catch {
     return reponse({ code: "base", message: "Service injoignable." }, 502);
   }
+}
+
+Deno.serve(async (req) => {
+  const r = await traiter(req);
+  r.headers.set("Access-Control-Allow-Origin", origineDe(req));
+  return r;
 });

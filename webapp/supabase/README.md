@@ -2,13 +2,13 @@
 
 L'accès à la base commune se fait avec des **comptes membres** administrés dans Supabase (Authentication) : chacun a son e-mail et son mot de passe, et l'administrateur peut ajouter, suspendre ou supprimer un membre sans toucher au code.
 
-La page ne contient **aucune clé Supabase**. Elle appelle la fonction Edge `granules-state`, qui :
+La connexion se fait au portail Hympyr (session supabase-js commune). La page appelle la fonction Edge `granules-state` avec le jeton de cette session ; la fonction :
 
-1. connecte le membre auprès de Supabase Auth (e-mail + mot de passe), renouvelle sa session, envoie le lien « mot de passe oublié » ;
+1. garde les actions `login`, `refresh` et `recover`, que la page n'utilise plus ;
 2. vérifie à chaque requête le jeton du membre **et** sa présence (actif) dans `public.granules_membres` ;
 3. lit / écrit la table `public.granules_state` avec la clé serveur, avec contrôle de révision (`409` si une autre session a enregistré entre-temps) et enregistrement de l'auteur.
 
-> **Pourquoi une fonction plutôt que des appels directs depuis la page ?** Le projet `cmvkijtlkzfwnzipgstc` contient aussi d'autres tables (suivi, appels, historique, fichiers…) dont la sécurité par ligne (RLS) est désactivée : la clé publique du projet donne accès à ces tables. Elle ne doit donc figurer dans aucune page ni dépôt public.
+> **Pourquoi une fonction plutôt que des appels directs depuis la page ?** `granules_state` et `granules_membres` n'ont aucun droit pour les rôles `anon` et `authenticated` (RLS active, aucune règle) : seule la fonction, avec la clé serveur, les lit et les écrit. La clé publishable présente dans la page (la même que le portail) ne donne donc accès à aucune donnée du cockpit.
 
 ## Mise en place (une seule fois)
 
@@ -16,9 +16,8 @@ La page ne contient **aucune clé Supabase**. Elle appelle la fonction Edge `gra
 2. **Déployer la fonction** (CLI Supabase, depuis `webapp/`) :
    ```bash
    supabase functions deploy granules-state --project-ref cmvkijtlkzfwnzipgstc --no-verify-jwt
-   supabase secrets set GRANULES_ALLOWED_ORIGIN=https://quentindebrie-code.github.io GRANULES_SITE_URL=https://quentindebrie-code.github.io/HYM_CALCUL_LIVRAISON_GRANUL-S/webapp/ --project-ref cmvkijtlkzfwnzipgstc
    ```
-   `--no-verify-jwt` : la fonction fait elle-même la vérification (jeton du membre + liste des membres). `GRANULES_SITE_URL` est l'adresse de la webapp (lien des e-mails de réinitialisation).
+   `--no-verify-jwt` : la fonction fait elle-même la vérification (jeton du membre + liste des membres). Aucun secret à définir : l'origine `https://hympyr-energies.github.io` est autorisée par défaut. `GRANULES_ALLOWED_ORIGIN` (liste séparée par des virgules) n'ajoute que des origines supplémentaires, par exemple pour un essai local.
 3. **Authentication** (tableau de bord) : *Sign In / Providers* → désactiver **Allow new users to sign up** (seul l'administrateur crée des comptes) ; *URL Configuration* → *Site URL* = l'adresse de la webapp.
 4. **Reconstruire la page** avec l'adresse de la fonction :
    ```bash
