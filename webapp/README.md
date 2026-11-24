@@ -1,6 +1,6 @@
 # Cockpit granulés — webapp HTML (Hympyr Énergies)
 
-Refonte de l'outil Streamlit `app_gran.py` en **application web statique** : un seul fichier, `index.html`, sans serveur Python.
+Refonte de l'ancien outil Streamlit (`app_gran.py`, retiré le 24/11/2026) en **application web statique** : un seul fichier, `index.html`, sans serveur Python.
 Mêmes fonctionnalités, mêmes règles de calcul (vérifiées par des tests de parité avec le code Python d'origine), nouveau design Hympyr : verre, fond photo-granulés, effet magnétique des boutons, onglets en barre basse sur mobile, transitions douces.
 
 ## Utiliser l'application
@@ -16,7 +16,7 @@ Mêmes fonctionnalités, mêmes règles de calcul (vérifiées par des tests de 
 | **Mode local** (par défaut) | `SYNC_URL` vide | Grille et historique conservés dans le navigateur de l'appareil. Pastille « Mode local » dans l'en-tête. Exporter régulièrement le classeur Excel ou la sauvegarde `.json` (Paramètres). |
 | **Base commune** | `SYNC_URL` renseigné | Même base Supabase que la version Streamlit, partagée par toute l'équipe : chargement au démarrage, sauvegarde à chaque validation, détection des modifications concurrentes (révision), repli local si la base est injoignable. Voir `supabase/README.md`. |
 
-**Aucune clé Supabase n'est dans la page** : la connexion et les données passent par une fonction Edge qui détient les clés, valide le jeton du membre, vérifie qu'il figure dans la liste des membres (`granules_membres`, actif) puis lit ou écrit. Chaque sauvegarde enregistre qui l'a faite (« Dernière sauvegarde : … » dans les Paramètres).
+**Connexion unique** : la page n'a plus d'écran de connexion. Elle lit la session supabase-js ouverte au portail Hympyr (même origine, même clé de stockage) ; sans session, elle renvoie au portail avec `?retour=` et y revient une fois connecté. « Se déconnecter » ferme la session de tous les outils. La page contient seulement la clé **publishable** (publique par conception) ; les données passent par une fonction Edge qui détient les clés, valide le jeton du membre, vérifie qu'il figure dans la liste des membres (`granules_membres`, actif) puis lit ou écrit. Chaque sauvegarde enregistre qui l'a faite (« Dernière sauvegarde : … » dans les Paramètres).
 
 ## Les quatre onglets
 
@@ -53,7 +53,6 @@ supabase/          fonction Edge (passerelle sécurisée vers la table granules_
 
 ```bash
 python3 build.py                                   # génère index.html
-python3 tests/generer_reference.py ../app_gran.py   # (re)génère reference.json depuis le code Python d'origine
 node tests/parite.test.js                          # 38 groupes de tests : arrondis, TVA, zones, vrac, historique, analyses, import, classeur…
 ```
 

@@ -33,7 +33,17 @@ fond = '<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="
 sync = ''
 if '--sync-url' in sys.argv:
     sync = sys.argv[sys.argv.index('--sync-url') + 1]
-config = json.dumps({'SYNC_URL': sync}, ensure_ascii=False)
+def option(nom, defaut):
+    return sys.argv[sys.argv.index(nom) + 1] if nom in sys.argv else defaut
+
+
+# Session commune des outils Hympyr : même projet Supabase, même clé publique (« publishable », publique par conception)
+# et même origine que le portail. Jamais de clé secrète ici : les données restent derrière la fonction Edge.
+config = json.dumps({'SYNC_URL': sync,
+                     'SB_URL': option('--sb-url', 'https://cmvkijtlkzfwnzipgstc.supabase.co'),
+                     'SB_KEY': option('--sb-key', 'sb_publishable_Q8HVlAGCLlpF5P3Gqsa_9g_fKDDD0bZ'),
+                     'PORTAIL_URL': option('--portail-url', 'https://hympyr-energies.github.io/portail/'),
+                     'OUTIL': 'cockpit_granules'}, ensure_ascii=False)
 
 js = '\n'.join(lire(n) for n in ['logique.js', 'core.js', 'simulateur.js', 'grille.js', 'donnees.js', 'analyse.js', 'exports.js', 'main.js'])
 js = js.replace('</script>', '<\\/script>')
