@@ -7,6 +7,35 @@
 <meta name="theme-color" content="#17100A">
 <meta name="robots" content="noindex,nofollow">
 <title>Cockpit granulés · Hympyr</title>
+<script>
+/* Nom affiché de l'outil : renommable par un administrateur du portail (Administration > Outils).
+   Lu sans connexion par la fonction publique portail_nom_outil() (elle ne renvoie que ce nom).
+   Le dernier nom connu est gardé dans le navigateur pour l'afficher dès l'ouverture, sans clignement.
+   Usage : <span data-nom-outil>…</span> dans la page, window.HYM_NOM_OUTIL() dans le code. */
+(function () {
+  var SLUG = 'cockpit_granules', DEFAUT = 'Cockpit granulés', SUFFIXE = ' · Hympyr';
+  var SB_URL = 'https://cmvkijtlkzfwnzipgstc.supabase.co', SB_KEY = 'sb_publishable_Q8HVlAGCLlpF5P3Gqsa_9g_fKDDD0bZ'; // clé publique par conception
+  var CLE = 'hym.nom-outil.' + SLUG, nom = DEFAUT;
+  try { nom = localStorage.getItem(CLE) || DEFAUT; } catch (e) {}
+  function appliquer() {
+    document.title = nom + SUFFIXE;
+    var l = document.querySelectorAll('[data-nom-outil]');
+    for (var i = 0; i < l.length; i++) l[i].textContent = nom;
+  }
+  window.HYM_NOM_OUTIL = function () { return nom; };
+  document.title = nom + SUFFIXE;
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', appliquer); else appliquer();
+  if (!window.fetch) return;
+  fetch(SB_URL + '/rest/v1/rpc/portail_nom_outil', {
+    method: 'POST', headers: { apikey: SB_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_slug: SLUG })
+  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (n) {
+    if (typeof n !== 'string' || !n.trim() || n === nom) return;
+    nom = n.trim();
+    try { localStorage.setItem(CLE, nom); } catch (e) {}
+    if (document.readyState !== 'loading') appliquer();
+  }).catch(function () { /* hors ligne ou script SQL pas encore exécuté : on garde le nom connu */ });
+})();
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23CB7A28'/%3E%3Cpath d='M20 46V18h6v10h12V18h6v28h-6V34H26v12z' fill='%23F5F4F0'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2655,7 +2684,7 @@ body:not(.pret) .hd,body:not(.pret) .app,body:not(.pret) .basse{visibility:hidde
         (S.mode === 'cloud' ? '<button class="btn btn--main btn--s" type="button" data-sauver>' + icon('cloud') + 'Enregistrer l\'état actuel</button><button class="btn btn--ghost btn--s" type="button" data-rech>' + icon('refresh') + 'Recharger depuis la base</button>' : '') + '</div></section>' +
       '<section><h3 class="etiquette">Sauvegarde sur cet appareil</h3><p class="aide" style="margin-top:var(--s2)">Un fichier .json contenant la grille et tout l\'historique, au même format que la base commune.</p><div class="actions" style="margin-top:var(--s3)"><button class="btn btn--ghost btn--s" type="button" data-exp-json>' + icon('download') + 'Exporter (.json)</button><label class="btn btn--ghost btn--s" for="p-imp-json" style="cursor:pointer">' + icon('upload') + 'Importer (.json)</label><input type="file" id="p-imp-json" accept=".json,application/json" class="sr"></div></section>' +
       '<section><h3 class="etiquette">Réinitialisation</h3><div class="actions" style="margin-top:var(--s3)"><button class="btn btn--danger btn--s" type="button" data-reset>' + icon('trash') + 'Revenir aux valeurs par défaut</button></div></section>' +
-      '<p class="aide">Cockpit granulés ' + VERSION + ' · ' + esc(H.CONFIG.SOCIETE) + ' · ' + esc(H.CONFIG.TELEPHONE) + '</p></div>', { classe: 'dlg-tiroir' });
+      '<p class="aide">' + esc(window.HYM_NOM_OUTIL ? HYM_NOM_OUTIL() : 'Cockpit granulés') + ' ' + VERSION + ' · ' + esc(H.CONFIG.SOCIETE) + ' · ' + esc(H.CONFIG.TELEPHONE) + '</p></div>', { classe: 'dlg-tiroir' });
     var el = f.el;
     $('[data-fermer]', el).onclick = f.fermer;
     var m = $('[data-mdp]', el); if (m) m.onclick = function () { f.fermer(); nouveauMotDePasse(); };
