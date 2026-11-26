@@ -122,7 +122,7 @@
         (S.mode === 'cloud' ? '<button class="btn btn--main btn--s" type="button" data-sauver>' + icon('cloud') + 'Enregistrer l\'état actuel</button><button class="btn btn--ghost btn--s" type="button" data-rech>' + icon('refresh') + 'Recharger depuis la base</button>' : '') + '</div></section>' +
       '<section><h3 class="etiquette">Sauvegarde sur cet appareil</h3><p class="aide" style="margin-top:var(--s2)">Un fichier .json contenant la grille et tout l\'historique, au même format que la base commune.</p><div class="actions" style="margin-top:var(--s3)"><button class="btn btn--ghost btn--s" type="button" data-exp-json>' + icon('download') + 'Exporter (.json)</button><label class="btn btn--ghost btn--s" for="p-imp-json" style="cursor:pointer">' + icon('upload') + 'Importer (.json)</label><input type="file" id="p-imp-json" accept=".json,application/json" class="sr"></div></section>' +
       '<section><h3 class="etiquette">Réinitialisation</h3><div class="actions" style="margin-top:var(--s3)"><button class="btn btn--danger btn--s" type="button" data-reset>' + icon('trash') + 'Revenir aux valeurs par défaut</button></div></section>' +
-      '<p class="aide">Cockpit granulés ' + VERSION + ' · ' + esc(H.CONFIG.SOCIETE) + ' · ' + esc(H.CONFIG.TELEPHONE) + '</p></div>', { classe: 'dlg-tiroir' });
+      '<p class="aide">' + esc(window.HYM_NOM_OUTIL ? HYM_NOM_OUTIL() : 'Cockpit granulés') + ' ' + VERSION + ' · ' + esc(H.CONFIG.SOCIETE) + ' · ' + esc(H.CONFIG.TELEPHONE) + '</p></div>', { classe: 'dlg-tiroir' });
     var el = f.el;
     $('[data-fermer]', el).onclick = f.fermer;
     var m = $('[data-mdp]', el); if (m) m.onclick = function () { f.fermer(); nouveauMotDePasse(); };
